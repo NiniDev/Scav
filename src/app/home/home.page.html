@@ -1,20 +1,62 @@
-<ion-header [translucent]="true">
+<ion-header collapse="fade">
   <ion-toolbar>
     <ion-title>
-      Blank
+      Test Titel
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="secondary">
+      <ion-icon name="home"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+  <ion-fab vertical="bottom" horizontal="start" slot="fixed">
+    <ion-fab-button color="tertiary">
+      <ion-icon name="home"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>
+        <h1>Hallo</h1>
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid amet architecto assumenda blanditiis debitis dolore doloribus eaque error explicabo id iste iusto mollitia nobis numquam qui ullam voluptate, voluptatibus! Enim?
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid amet architecto assumenda blanditiis debitis dolore doloribus eaque error explicabo id iste iusto mollitia nobis numquam qui ullam voluptate, voluptatibus! Enim?
+      </p>
+    </ion-card-content>
+  </ion-card>
+
+  <div style="text-align: center">
+    <ion-button color="danger">
+      Danger
+    </ion-button>
+    <ion-button color="warning" style="margin-top: 1em">
+      Warning
+    </ion-button>
+    <br>
+    <ion-button color="success" style="margin-top: 1em">
+      Success
+    </ion-button>
+    <ion-button color="secondary" style="margin-top: 1em">
+      Secondary
+    </ion-button>
+    <br>
+    <ion-button color="tertiary" style="margin-top: 1em">
+      Tertiary
+    </ion-button>
+    <ion-button color="light" style="margin-top: 1em">
+      Light
+    </ion-button>
+    <br>
+    <ion-button color="medium" style="margin-top: 1em">
+      medium
+    </ion-button>
   </div>
 </ion-content>
