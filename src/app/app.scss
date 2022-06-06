@@ -1,5 +1,8 @@
+@import "timetable";
+
 * {
   font-family: Poppins, sans-serif;
+  font-weight: 300;
 }
 
 ion-content {
@@ -7,11 +10,11 @@ ion-content {
 }
 
 ion-toolbar {
-  --background: var(--ion-color-primary);
+  --background: transparent;
   --color: white;
   font-family: Poppins, sans-serif;
   text-align: center;
-  font-weight: bold;
+  font-weight: 500;
 }
 
 ion-card {
@@ -24,4 +27,139 @@ ion-card-title {
 }
 .toolbar-background {
   border-radius: 0 0 1rem 1rem;
+}
+
+.layer-card {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  border-radius: 1.8rem 1.8rem 0 0;
+  padding: 1rem;
+  overflow: scroll;
+  div.layer-card-header {
+    font-weight: 400;
+    font-size: 1.4rem;
+    color: white;
+  }
+
+  &.blue {
+    background: rgba(64, 63, 252, 1);
+  }
+  &.dark {
+    background: #232323;
+    div.layer-card-header {
+      color: white;
+      div {
+        background: linear-gradient(#232323 70%, rgba(35, 35, 35, 0.63) 80%, rgba(0, 0, 0, 0) 100%);
+        width: 100vw;
+        height: 3.5rem;
+        margin-left: -1rem;
+        margin-top: -1.05rem;
+        border-radius: 1.8rem 1.8rem 0 0;
+        z-index: 9999;
+        padding-left: 1rem;
+        padding-top: 1rem;
+        position: fixed;
+      }
+    }
+  }
+
+  div.layer-card-content {
+    overflow: auto;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+  }
+
+}
+
+ion-fab-button.dashed {
+  --background: rgba(255, 255, 255, 0);
+  --border-style: dashed;
+  --box-shadow: none;
+  --border-color: #ffffff;
+  --border-width: 0.05rem;
+}
+
+.info-card {
+  background: white;
+  border-radius: .5rem 1.8rem .5rem 1.8rem;
+  padding-top: 0.1rem;
+  padding-bottom: 0.1rem;
+  padding-inline: 0.4rem;
+  margin-bottom: 1rem;
+  &.icon {
+    border-radius: .5rem 1.1rem .5rem 1.1rem;
+    padding-inline: 0.1rem;
+  }
+}
+
+ion-label {
+  font-weight: 500;
+}
+
+ion-tab-bar {
+  border-radius: 1.5rem 1.5rem 0 0;
+  background: var(--ion-color-primary-shade);
+  ion-tab-button {
+    --background: var(--ion-color-primary-shade);
+    --color: var(--ion-color-light-tint);
+    --color-selected: var(--ion-color-tertiary-tint);
+  }
+}
+
+.indicator-point {
+  border-radius: 50%;
+  width: 0.5rem;
+  height: 0.5rem;
+  margin: 0.2rem;
+  display: inline-block;
+  vertical-align: middle;
+
+
+  &[color="primary"] {
+    background: var(--ion-color-primary);
+  }
+  &[color="secondary"] {
+    background: var(--ion-color-secondary);
+  }
+  &[color="tertiary"] {
+    background: var(--ion-color-tertiary);
+  }
+  &[color="success"] {
+    background: var(--ion-color-success);
+  }
+  &[color="warning"] {
+    background: var(--ion-color-warning);
+  }
+  &[color="danger"] {
+    background: var(--ion-color-danger);
+  }
+  &[color="light"] {
+    background: var(--ion-color-light);
+  }
+  &[color="medium"] {
+    background: var(--ion-color-medium);
+  }
+
+  &[important] {
+    width: 0.6rem;
+    height: 0.6rem;
+  }
+
+  &[icon] {
+    width: fit-content;
+    height: fit-content;
+    ion-icon {
+      display: flex;
+      font-size: 1.1rem;
+    }
+    padding: .2rem;
+  }
+}
+
+ion-badge {
+  vertical-align: middle;
+  margin-right: .2rem;
 }
