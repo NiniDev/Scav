@@ -1,62 +1,336 @@
 <ion-header collapse="fade">
   <ion-toolbar>
     <ion-title>
-      Test Titel
+      Scav
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button color="secondary">
-      <ion-icon name="home"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
-
-  <ion-fab vertical="bottom" horizontal="start" slot="fixed">
-    <ion-fab-button color="tertiary">
-      <ion-icon name="home"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
-
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>
-        <h1>Hallo</h1>
-      </ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
+  <!--<div class="layer-card blue" style="top: 4rem;">
+    <div class="layer-card-header">
+      Hallo,
+    </div>
+    <div class="layer-card-body">
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid amet architecto assumenda blanditiis debitis dolore doloribus eaque error explicabo id iste iusto mollitia nobis numquam qui ullam voluptate, voluptatibus! Enim?
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid amet architecto assumenda blanditiis debitis dolore doloribus eaque error explicabo id iste iusto mollitia nobis numquam qui ullam voluptate, voluptatibus! Enim?
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        Donec euismod, nisi eu consectetur consectetur
       </p>
-    </ion-card-content>
-  </ion-card>
+    </div>
+  </div>
+  <div class="layer-card dark" style="top: 13rem;">
+  <div class="layer-card-header" style="height: 2.6rem">
+    <div>
+      Infos
+    </div>
 
-  <div style="text-align: center">
-    <ion-button color="danger">
-      Danger
-    </ion-button>
-    <ion-button color="warning" style="margin-top: 1em">
-      Warning
-    </ion-button>
-    <br>
-    <ion-button color="success" style="margin-top: 1em">
-      Success
-    </ion-button>
-    <ion-button color="secondary" style="margin-top: 1em">
-      Secondary
-    </ion-button>
-    <br>
-    <ion-button color="tertiary" style="margin-top: 1em">
-      Tertiary
-    </ion-button>
-    <ion-button color="light" style="margin-top: 1em">
-      Light
-    </ion-button>
-    <br>
-    <ion-button color="medium" style="margin-top: 1em">
-      medium
-    </ion-button>
+  </div>
+  <div class="layer-card-content">
+    <div class="info-card">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="auto" style="display:flex;">
+            <div class="info-card icon" style="background: #3AD2A1; margin: auto; display: flex">
+              <ion-icon name="wallet" style="font-size: 2rem; color: #fff; padding: .5rem;"></ion-icon>
+            </div>
+          </ion-col>
+          <ion-col>
+            <ion-label>Info #1</ion-label>
+            <p style="margin: 0">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad architecto debitis
+            </p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+    <div class="info-card">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="auto" style="display:flex;">
+            <div class="info-card icon" style="background: #3AD2A1; margin: auto; display: flex">
+              <ion-icon name="camera" style="font-size: 2rem; color: #fff; padding: .5rem;"></ion-icon>
+            </div>
+          </ion-col>
+          <ion-col>
+            <ion-label>Info #2</ion-label>
+            <p style="margin: 0">
+              labore natus nemo, nobis obcaecati pariatur
+            </p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+    <div class="info-card">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="auto" style="display:flex;">
+            <div class="info-card icon" style="background: #3AD2A1; margin: auto; display: flex">
+              <ion-icon name="camera" style="font-size: 2rem; color: #fff; padding: .5rem;"></ion-icon>
+            </div>
+          </ion-col>
+          <ion-col>
+            <ion-label>Info #2</ion-label>
+            <p style="margin: 0">
+              labore natus nemo, nobis obcaecati pariatur
+            </p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+    <div class="info-card">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="auto" style="display:flex;">
+            <div class="info-card icon" style="background: #3AD2A1; margin: auto; display: flex">
+              <ion-icon name="camera" style="font-size: 2rem; color: #fff; padding: .5rem;"></ion-icon>
+            </div>
+          </ion-col>
+          <ion-col>
+            <ion-label>Info #2</ion-label>
+            <p style="margin: 0">
+              labore natus nemo, nobis obcaecati pariatur
+            </p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+    <div class="info-card">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="auto" style="display:flex;">
+            <div class="info-card icon" style="background: #3AD2A1; margin: auto; display: flex">
+              <ion-icon name="camera" style="font-size: 2rem; color: #fff; padding: .5rem;"></ion-icon>
+            </div>
+          </ion-col>
+          <ion-col>
+            <ion-label>Info #2</ion-label>
+            <p style="margin: 0">
+              labore natus nemo, nobis obcaecati pariatur
+            </p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+    <div class="info-card">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="auto" style="display:flex;">
+            <div class="info-card icon" style="background: #3AD2A1; margin: auto; display: flex">
+              <ion-icon name="camera" style="font-size: 2rem; color: #fff; padding: .5rem;"></ion-icon>
+            </div>
+          </ion-col>
+          <ion-col>
+            <ion-label>Info #2</ion-label>
+            <p style="margin: 0">
+              labore natus nemo, nobis obcaecati pariatur
+            </p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+    <div class="info-card">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="auto" style="display:flex;">
+            <div class="info-card icon" style="background: #3AD2A1; margin: auto; display: flex">
+              <ion-icon name="camera" style="font-size: 2rem; color: #fff; padding: .5rem;"></ion-icon>
+            </div>
+          </ion-col>
+          <ion-col>
+            <ion-label>Info #2</ion-label>
+            <p style="margin: 0">
+              labore natus nemo, nobis obcaecati pariatur
+            </p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+    <div class="info-card">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="auto" style="display:flex;">
+            <div class="info-card icon" style="background: #3AD2A1; margin: auto; display: flex">
+              <ion-icon name="camera" style="font-size: 2rem; color: #fff; padding: .5rem;"></ion-icon>
+            </div>
+          </ion-col>
+          <ion-col>
+            <ion-label>Info #2</ion-label>
+            <p style="margin: 0">
+              labore natus nemo, nobis obcaecati pariatur
+            </p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </div>-->
+  <div class="layer-card dark" style="top: 4rem;">
+    <div class="layer-card-header">
+      Heutiger Ablauf
+    </div>
+    <div class="layer-card-body">
+      <div class="timetable-day">
+        <div class="timetable-day-header">
+          <span class="timetable-day-header-date">{{this.today | date:'d. LLLL YYYY':'':'de'}}</span><br>
+          <div class="weekday">
+            {{this.today | date:'EEEE':'':'de'}}
+          </div>
+          <span class="timetable-day-header-time">{{events[1].start}}
+          - {{events[11].end}}
+          </span>
+        </div>
+        <div class="timetable-day-body">
+          <ion-grid id="grid">
+            <ion-row class="timetable-day-timeslot"
+                     *ngFor="let event of eventkeys"
+                      [class.shortbreak]="events[event].duration === 'SHORT'"
+                      [class.longbreak]="events[event].duration === 'LONG'"
+                     style="--bg: {{subjects[events[event]?.subject]?.color}}26">
+              <ion-col size="auto" class="timetable-day-timeslot-startend" *ngIf="!events[event].break">
+                  {{events[event].start}} - <br>
+                {{events[event].end}}
+              </ion-col>
+              <ion-col class="timetable-day-timeslot-info" *ngIf="!events[event].break">
+                <ion-label class="timetable-day-timeslot-label">
+                  {{subjects[events[event].subject].name}}
+                </ion-label>
+                <div class="indicator-point" color="tertiary" icon *ngIf="getHomework(events[event].slot).length > 0">
+                  <ion-icon name="alert" *ngIf="hasUnfinishedHomework(events[event].slot)"></ion-icon>
+                </div>
+                <!--<div class="indicator-point" color="secondary" important *ngIf="timeslot.classtest.length > 0">
+                </div>-->
+              </ion-col>
+            </ion-row>
+            <!--<ion-row class="timetable-day-timeslot subject-german">
+              <ion-col size="auto" class="timetable-day-timeslot-startend">
+                08:50 - <br>
+                09:35
+              </ion-col>
+              <ion-col class="timetable-day-timeslot-info">
+                <ion-label class="timetable-day-timeslot-label">
+                  Deutsch
+                </ion-label>
+              </ion-col>
+            </ion-row>
+            <ion-row class="timetable-day-timeslot longbreak"></ion-row>
+            <ion-row class="timetable-day-timeslot subject-math">
+              <ion-col size="auto" class="timetable-day-timeslot-startend">
+                09:55 - <br>
+                10:40
+              </ion-col>
+              <ion-col class="timetable-day-timeslot-info">
+                <ion-label class="timetable-day-timeslot-label">
+                  Mathe
+                </ion-label>
+              </ion-col>
+            </ion-row>
+            <ion-row class="timetable-day-timeslot subject-math">
+              <ion-col size="auto" class="timetable-day-timeslot-startend">
+                 10:40 - <br>
+                  11:25
+              </ion-col>
+              <ion-col class="timetable-day-timeslot-info">
+                <ion-label class="timetable-day-timeslot-label">
+                  Mathe
+                </ion-label>
+              </ion-col>
+            </ion-row>
+            <ion-row class="timetable-day-timeslot shortbreak"></ion-row>
+            <ion-row class="timetable-day-timeslot subject-physics">
+              <ion-col size="auto" class="timetable-day-timeslot-startend">
+                11:35 - <br>
+                12:20
+              </ion-col>
+              <ion-col class="timetable-day-timeslot-info">
+                <ion-label class="timetable-day-timeslot-label">
+                  Physik
+                </ion-label>
+                <div class="timetable-day-timeslot-additions">
+                  <ion-badge mode="ios" class="badge-homework">Hausaufgaben zu Heute</ion-badge>
+                </div>
+              </ion-col>
+            </ion-row>
+            <ion-row class="timetable-day-timeslot longbreak"></ion-row>
+            <ion-row class="timetable-day-timeslot subject-physicaleducation">
+              <ion-col size="auto" class="timetable-day-timeslot-startend">
+                12:55 - <br>
+                13:40
+              </ion-col>
+              <ion-col class="timetable-day-timeslot-info">
+                <ion-label class="timetable-day-timeslot-label">
+                  Sport
+                </ion-label>
+              </ion-col>
+            </ion-row>
+            <ion-row class="timetable-day-timeslot shortbreak"></ion-row>
+            <ion-row class="timetable-day-timeslot subject-physicaleducation">
+              <ion-col size="auto" class="timetable-day-timeslot-startend">
+                13:50 - <br>
+                14:35
+              </ion-col>
+              <ion-col class="timetable-day-timeslot-info">
+                <ion-label class="timetable-day-timeslot-label">
+                  Sport
+                </ion-label>
+              </ion-col>
+            </ion-row>-->
+
+          </ion-grid>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="layer-card blue" style="top: calc({{el?.getBoundingClientRect().bottom}}px + .5rem)">
+    <div class="layer-card-header">
+      Anstehende Aufgaben
+    </div>
+    <div class="layer-card-body" style="padding-bottom: 1.8rem">
+      <div class="info-card" style="padding: 1rem"
+      *ngFor="let hw of getOrderedHomework()"
+      >
+        <!--<ion-grid>
+          <ion-row>
+            <ion-col size="auto" style="display:flex;">
+              <div class="info-card icon" style="background: #3AD2A1; margin: auto; display: flex">
+                <ion-icon name="wallet" style="font-size: 2rem; color: #fff; padding: .5rem;"></ion-icon>
+              </div>
+            </ion-col>
+            <ion-col>-->
+              <ion-label>
+                {{hw.title}}
+                <ion-badge style="--background: {{subjects[hw.subject].color}}" mode="ios">
+                  {{subjects[hw.subject].abbr}}
+                </ion-badge>
+                <ion-badge mode="ios" color="light">
+                  {{getDiffDays(hw.untilDate)}} Tage
+                </ion-badge>
+                <ion-badge color="primary" mode="ios">HA</ion-badge>
+              </ion-label>
+              <p style="margin: 0">
+                {{hw.description}}
+              </p>
+            <!--</ion-col>
+          </ion-row>
+        </ion-grid>-->
+      </div>
+    </div>
   </div>
 </ion-content>
+
+<ion-toolbar>
+  <ion-tabs mode="ios">
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button tab="overview" selected>
+        <ion-icon name="home"></ion-icon>
+      </ion-tab-button>
+      <ion-tab-button tab="upcoming">
+        <ion-icon name="hourglass"></ion-icon>
+      </ion-tab-button>
+      <ion-tab-button tab="schedule">
+        <ion-icon name="calendar"></ion-icon>
+      </ion-tab-button>
+      <ion-tab-button tab="learn">
+        <ion-icon name="school"></ion-icon>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
+</ion-toolbar>
