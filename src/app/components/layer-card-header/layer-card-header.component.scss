@@ -1,0 +1,20 @@
+.layer-card-header {
+  font-weight: 400;
+  font-size: 1.4rem;
+  color: white;
+  &.fade {
+    &.blue {
+      background: linear-gradient(rgba(64, 63, 252, 1) 70%, rgba(64, 63, 252, 63) 80%, rgba(64, 63, 252, 0) 100%);
+    }
+    background: linear-gradient(#232323 70%, rgba(35, 35, 35, 0.63) 80%, rgba(0, 0, 0, 0) 100%);
+    width: 100vw;
+    height: var(--header-height);
+    margin-left: -1rem;
+    margin-top: -1.05rem;
+    border-radius: 1.8rem 1.8rem 0 0;
+    z-index: 9999;
+    padding-left: 1rem;
+    padding-top: 1rem;
+    position: fixed;
+  }
+}

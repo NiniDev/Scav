@@ -1,0 +1,11 @@
+<script src="timetable-day-body.component.ts"></script>
+<div class="timetable-day-body">
+  <ion-grid id="grid">
+    <app-timetable-day-timeslot
+      *ngFor="let event of eventKeys"
+      [event]="events[event]"
+      [subjects]="subjects"
+      [homework]="getHomework(events[event].slot)"
+    ></app-timetable-day-timeslot>
+  </ion-grid>
+</div>

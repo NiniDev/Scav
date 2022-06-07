@@ -1,0 +1,19 @@
+<ion-row class="timetable-day-timeslot"
+         [class.shortbreak]="event.duration === 'SHORT'"
+         [class.longbreak]="event.duration === 'LONG'"
+         style="--bg: {{subjects[event?.subject]?.color}}26">
+  <ion-col size="auto" class="timetable-day-timeslot-startend" *ngIf="!event.break">
+    {{event.start}} - <br>
+    {{event.end}}
+  </ion-col>
+  <ion-col class="timetable-day-timeslot-info" *ngIf="!event.break">
+    <ion-label class="timetable-day-timeslot-label">
+      {{subjects[event.subject].name}}
+    </ion-label>
+    <div class="indicator-point" color="tertiary" icon *ngIf="homework.length > 0">
+      <ion-icon name="alert" *ngIf="hasUnfinishedHomework()"></ion-icon>
+    </div>
+    <!--<div class="indicator-point" color="secondary" important *ngIf="timeslot.classtest.length > 0">
+    </div>-->
+  </ion-col>
+</ion-row>

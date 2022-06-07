@@ -1,0 +1,15 @@
+.timetable-day-header {
+  border-bottom: var(--ion-color-light) solid 1px;
+  font-weight: 400;
+  font-size: 1.2rem;
+  top: -2.6rem;
+  padding-bottom: -3.5rem;
+  background: linear-gradient(#232323 80%, rgba(35, 35, 35, 0.63) 90%, rgba(0, 0, 0, 0) 100%);
+  span {
+    font-size: 0.8rem;
+    color: var(--ion-light-text);
+  }
+  z-index: 9999;
+  position: sticky;
+
+}

@@ -1,0 +1,12 @@
+.info-card {
+  background: white;
+  border-radius: .5rem 1.8rem .5rem 1.8rem;
+  padding-top: 0.1rem;
+  padding-bottom: 0.1rem;
+  padding-inline: 0.4rem;
+  margin-bottom: 1rem;
+  &.icon {
+    border-radius: .5rem 1.1rem .5rem 1.1rem;
+    padding-inline: 0.1rem;
+  }
+}

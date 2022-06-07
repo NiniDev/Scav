@@ -1,0 +1,17 @@
+.layer-card {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  border-radius: 1.8rem 1.8rem 0 0;
+  padding: 1rem;
+  overflow: scroll;
+
+  &.blue {
+    background: rgba(64, 63, 252, 1);
+  }
+  &.dark {
+    background: #232323;
+  }
+}

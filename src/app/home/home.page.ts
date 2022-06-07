@@ -158,8 +158,6 @@ export class HomePage implements AfterViewInit {
       done: false
     }
   };
-  today: number = Date.now();
-  eventkeys = Object.keys(this.events);
   el;
   constructor(
     private datePipe: DatePipe
@@ -168,22 +166,6 @@ export class HomePage implements AfterViewInit {
 
   ngAfterViewInit() {
     this.el = document.getElementById('grid');
-  }
-
-  getHomework(untilSlot: number) {
-    const homework = [];
-    // eslint-disable-next-line guard-for-in
-    for (const id in this.homework) {
-      const h = this.homework[id];
-      if (h.untilSlot === untilSlot) {
-        homework.push(h);
-      }
-    }
-    return homework;
-  }
-  hasUnfinishedHomework(untilSlot: number) {
-    const homework = this.getHomework(untilSlot);
-    return homework.some(h => !h.done);
   }
 
   getOrderedHomework() {
