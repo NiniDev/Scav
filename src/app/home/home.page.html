@@ -1,51 +1,7 @@
-<ion-header collapse="fade">
-  <ion-toolbar>
-    <ion-title>
-      Scav
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <app-layer-card top="4rem" color_style="dark">
-    <app-layer-card-header header_height="3.5rem" fade="fade" color_style="dark">Heutiger Ablauf</app-layer-card-header>
-    <app-layer-card-body fade_header_height="3.5rem" fade_header="fade">
-      <app-timetable-day>
-        <app-timetable-day-header
-          [events]="events"></app-timetable-day-header>
-        <app-timetable-day-body
-          [events]="events"
-          [homework]="homework"
-          [subjects]="subjects">
-        </app-timetable-day-body>
-      </app-timetable-day>
-    </app-layer-card-body>
-  </app-layer-card>
-  <app-layer-card top="calc({{el?.getBoundingClientRect().bottom}}px + .5rem)">
-    <app-layer-card-header header_height="3.5rem" fade="fade">Anstehende Aufgaben</app-layer-card-header>
-    <app-layer-card-body fade_header="fade" fade_header_height="3.5rem">
-      <app-info-card *ngFor="let hw of getOrderedHomework()" padding="1rem">
-          <ion-label>
-            {{hw.title}}
-            <ion-badge style="background: {{subjects[hw.subject].color}}" mode="ios">
-              {{subjects[hw.subject].abbr}}
-            </ion-badge>
-            <ion-badge mode="ios" color="light">
-              {{getDiffDays(hw.untilDate)}} Tage
-            </ion-badge>
-            <ion-badge color="primary" mode="ios">HA</ion-badge>
-          </ion-label>
-          <p style="margin: 0">
-            {{hw.description}}
-          </p>
-        </app-info-card>
-    </app-layer-card-body>
-  </app-layer-card>
-</ion-content>
-<ion-toolbar>
+<ion-content>
   <ion-tabs mode="ios">
     <ion-tab-bar slot="bottom">
-      <ion-tab-button tab="overview" selected>
+      <ion-tab-button tab="overview">
         <ion-icon name="home"></ion-icon>
       </ion-tab-button>
       <ion-tab-button tab="upcoming">
@@ -59,4 +15,6 @@
       </ion-tab-button>
     </ion-tab-bar>
   </ion-tabs>
-</ion-toolbar>
+</ion-content>
+
+

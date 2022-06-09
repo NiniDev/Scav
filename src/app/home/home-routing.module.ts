@@ -22,10 +22,14 @@ const routes: Routes = [
       {
         path: 'learn',
         loadChildren: () => import('./learn/learn.module').then( m => m.LearnPageModule)
+      },
+      {
+        path: '**',
+        redirectTo: '/home/overview',
+        pathMatch: 'full'
       }
     ]
   },
-
 ];
 
 @NgModule({
