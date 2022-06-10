@@ -4,13 +4,15 @@
 
 export const environment = {
   production: false,
-  apiKey: 'AIzaSyBZeB1YQ4D2u-JOuBXxiNCslIuB0ZwHqfA',
-  authDomain: 'scav-app.firebaseapp.com',
-  projectId: 'scav-app',
-  storageBucket: 'scav-app.appspot.com',
-  messagingSenderId: '291685377571',
-  appId: '1:291685377571:web:e4eb37f238041cd0c8b396',
-  measurementId: 'G-VKWC85EVEE'
+  firebase: {
+    apiKey: 'AIzaSyBZeB1YQ4D2u-JOuBXxiNCslIuB0ZwHqfA',
+    authDomain: 'scav-app.firebaseapp.com',
+    projectId: 'scav-app',
+    storageBucket: 'scav-app.appspot.com',
+    messagingSenderId: '291685377571',
+    appId: '1:291685377571:web:e4eb37f238041cd0c8b396',
+    measurementId: 'G-VKWC85EVEE'
+  }
 };
 
 /*
