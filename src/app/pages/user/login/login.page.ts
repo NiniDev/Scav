@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import {Router} from "@angular/router";
-import {AlertController, LoadingController} from "@ionic/angular";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {AlertController, LoadingController} from '@ionic/angular';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AuthService} from '../../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -11,12 +12,21 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 export class LoginPage implements OnInit {
   credentials: FormGroup;
 
-  constructor(
+  constructor(private authService: AuthService,
               private fb: FormBuilder,
               private loadingController: LoadingController,
               private alertController: AlertController,
               private router: Router
-  ) { }
+  ) {
+  }
+
+  get email() {
+    return this.credentials.get('email');
+  }
+
+  get password() {
+    return this.credentials.get('password');
+  }
 
   ngOnInit() {
     this.credentials = this.fb.group({
@@ -31,34 +41,26 @@ export class LoginPage implements OnInit {
     });
   }
 
-  get email() {
-    return this.credentials.get('email');
-  }
-
-  get password() {
-    return this.credentials.get('password');
-  }
-
   async login() {
     const loading = await this.loadingController.create();
     await loading.present();
 
-    try {
-      await
-      await loading.dismiss();
-      console.log('login:', this.credentials.value);
-      const toast = await this.alertController.create({
-        message: `Überprüfe deine E-Mails, um dein Konto zu aktivieren.`,
-      });
-      await toast.present();
-    } catch (e) {
-      await loading.dismiss();
-      const toast = await this.alertController.create({
-        message: e.error_description || e.message,
-      });
-      await toast.present();
-    }
+    const user = await this.authService.login(this.credentials.value);
     await loading.dismiss();
 
+    if (user) {
+      await this.router.navigateByUrl('/home', {replaceUrl: true});
+    } else {
+      const alert = await this.alertController.create({
+        header: 'Login fehlgeschlagen',
+        message: 'Bitte überprüfe deine Eingaben',
+        buttons: ['OK']
+      });
+      await alert.present();
+    }
+  }
+
+  navigateToRegister() {
+    this.router.navigateByUrl('/register', {replaceUrl: true});
   }
 }
