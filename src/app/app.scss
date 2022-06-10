@@ -107,3 +107,12 @@ ion-tab-bar {
   bottom: 0;
   width: 100vw;
 }
+
+ion-toolbar {
+  border-radius: 0 0 1.5rem 1.5rem;
+  background: var(--ion-color-primary-shade);
+}
+
+ion-header {
+  background: var(--ion-color-primary-shade);
+}
