@@ -1,0 +1,40 @@
+<ion-content class="ion-padding" color="tertiary">
+  <div class="ion-text-center">
+    <h1>Einloggen</h1>
+    <form [formGroup]="credentials" (ngSubmit)="register()">
+      <ion-item fill="solid" class="ion-margin-vertical">
+        <ion-label position="floating">Email</ion-label>
+        <ion-input type="text" formControlName="email"></ion-input>
+        <ion-note slot="error" *ngIf="(email.dirty || email.touched) && email.errors">
+          Die Email ist ungültig
+        </ion-note>
+      </ion-item>
+
+      <ion-item fill="solid" class="ion-margin-vertical">
+        <ion-label position="floating">Passwort</ion-label>
+        <ion-input type="password" formControlName="password"></ion-input>
+        <ion-note slot="error" *ngIf="(password.dirty || password.touched) && password.errors">
+          Das Passwort ist ungültig
+        </ion-note>
+      </ion-item>
+
+      <ion-item fill="solid" class="ion-margin-vertical">
+        <ion-label position="floating">Passwort Wiederhohlen</ion-label>
+        <ion-input type="password" formControlName="passwordConfirm"></ion-input>
+        <ion-note slot="error" *ngIf="(passwordConfirm.dirty || passwordConfirm.touched) && passwordConfirm.errors">
+          Das Passwort stimmt nicht überein
+        </ion-note>
+      </ion-item>
+
+      <ion-button expand="block" type="submit" [disabled]="credentials.invalid" color="primary">Registrieren</ion-button>
+    </form>
+  </div>
+
+</ion-content>
+<ion-footer>
+  <div class="ion-text-center">
+    <p>Du hast schon einen Account?
+      <ion-text color="secondary" (click)="navigateToLogin()">Einloggen</ion-text>
+    </p>
+  </div>
+</ion-footer>
