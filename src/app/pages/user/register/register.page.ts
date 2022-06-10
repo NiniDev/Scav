@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators} from "@angular/forms";
-import {Router} from "@angular/router";
-import {AlertController, LoadingController} from "@ionic/angular";
+import {AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
+import {AlertController, LoadingController} from '@ionic/angular';
+import {AuthService} from '../../../services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -14,7 +15,20 @@ export class RegisterPage implements OnInit {
   constructor(private fb: FormBuilder,
               private loadingController: LoadingController,
               private alertController: AlertController,
-              private router: Router) { }
+              private router: Router,
+              private authService: AuthService) { }
+
+  get email() {
+    return this.credentials.get('email');
+  }
+
+  get password() {
+    return this.credentials.get('password');
+  }
+
+  get passwordConfirm() {
+    return this.credentials.get('passwordConfirm');
+  }
 
   ngOnInit() {
     this.credentials = this.fb.group({
@@ -34,18 +48,6 @@ export class RegisterPage implements OnInit {
     });
   }
 
-  get email() {
-    return this.credentials.get('email');
-  }
-
-  get password() {
-    return this.credentials.get('password');
-  }
-
-  get passwordConfirm() {
-    return this.credentials.get('passwordConfirm');
-  }
-
   navigateToLogin() {
     this.router.navigateByUrl('/login', {replaceUrl: true});
   }
@@ -62,15 +64,17 @@ export class RegisterPage implements OnInit {
     const loading = await this.loadingController.create();
     await loading.present();
 
-    // const user = await this.authService.register(this.credentials.value);
+    const user = await this.authService.register({password: this.password.value, email: this.email.value});
+    console.log({password: this.password, email: this.email});
+    console.log(user);
     await loading.dismiss();
 
-    if (1) {
+    if (user) {
       await this.router.navigateByUrl('/home', {replaceUrl: true});
     } else {
       const alert = await this.alertController.create({
         header: 'Registrierung fehlgeschlagen',
-        message: 'Bitte überprüfe deine Eingaben.',
+        message: 'Bitte überprüfe deine Eingaben',
         buttons: ['OK']
       });
       await alert.present();
