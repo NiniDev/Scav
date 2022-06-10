@@ -4,8 +4,9 @@
 
 export const environment = {
   production: false,
-  supabaseUrl: "YOUR_SUPABASE_URL",
-  supabaseKey: "YOUR_SUPABASE_KEY"
+  supabaseUrl: 'https://gpxzwubfxbjvrxpitsfz.supabase.co',
+  // eslint-disable-next-line max-len
+  supabaseKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdweHp3dWJmeGJqdnJ4cGl0c2Z6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2NTQyODU1NDQsImV4cCI6MTk2OTg2MTU0NH0.hshtKgGGcbcrzrR7l0K0t1kOlJGasFXHGr4hePOF_Ck'
 };
 
 /*
