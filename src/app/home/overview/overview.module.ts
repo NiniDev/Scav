@@ -17,15 +17,22 @@ import {InfoCardComponent} from '../../components/info-card/info-card.component'
 import {TimetableDayTimeslotComponent} from '../../components/timetable-day-timeslot/timetable-day-timeslot.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    OverviewPageRoutingModule,
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        OverviewPageRoutingModule,
+    ],
+  exports: [
+    InfoCardComponent,
+    LayerCardComponent,
+    LayerCardHeaderComponent,
+    LayerCardBodyComponent
   ],
-  declarations: [OverviewPage,
-    LayerCardComponent, LayerCardHeaderComponent, LayerCardBodyComponent, TimetableDayComponent, TimetableDayHeaderComponent, TimetableDayBodyComponent, InfoCardComponent, TimetableDayTimeslotComponent
-  ]
+    declarations: [OverviewPage,
+      // eslint-disable-next-line max-len
+        LayerCardComponent, LayerCardHeaderComponent, LayerCardBodyComponent, TimetableDayComponent, TimetableDayHeaderComponent, TimetableDayBodyComponent, InfoCardComponent, TimetableDayTimeslotComponent
+    ]
 })
 export class OverviewPageModule {
 }

@@ -22,11 +22,20 @@ const routes: Routes = [
     ...canActivate(redirectLoggedInToHome)
   },
   {
+    path: 'profile',
+    loadChildren: () => import('./pages/user/profile/profile.module').then( m => m.ProfilePageModule),
+    ...canActivate(redirectUnauthorizedToLogin)
+  },
+  {
+    path: 'more-info',
+    loadChildren: () => import('./pages/user/more-info/more-info.module').then( m => m.MoreInfoPageModule),
+    ...canActivate(redirectUnauthorizedToLogin)
+  },
+  {
     path: '**',
     redirectTo: '',
     pathMatch: 'full'
-  },
-
+  }
 ];
 
 @NgModule({

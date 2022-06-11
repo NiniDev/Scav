@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Weitere Informationen</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <app-layer-card color_style="dark">
+    <app-layer-card-header>Nutzername</app-layer-card-header>
+    <app-layer-card-body id="step-1">
+      <ion-item color="light" style="border-radius: 2rem">
+        <ion-label position="floating">Nutzername</ion-label>
+        <ion-input [(ngModel)]="displayName"></ion-input>
+      </ion-item>
+      <ion-text style="color: var(--ion-light-text)">
+        Dein Benutzername ist öffentlich sichtbar.
+      </ion-text>
+      <ion-button shape="round" color="light" expand="block" (click)="saveName()">Speichern</ion-button>
+    </app-layer-card-body>
+  </app-layer-card>
+  <app-layer-card color_style="blue" top="calc({{el?.getBoundingClientRect().bottom}}px - 3rem)" *ngIf="user?.displayName">
+    <app-layer-card-header>Profilbild</app-layer-card-header>
+    <app-layer-card-body  style="; text-align: center">
+      <div class="preview">
+        <ion-avatar (click)="changeImage()">
+          <img *ngIf="user?.imageUrl; else placeholderAvatar" [src]="user.imageUrl"/>
+          <ng-template #placeholderAvatar>
+            <div class="fallback">
+              <p>Profilbild auswählen</p>
+            </div>
+          </ng-template>
+        </ion-avatar>
+      </div>
+      <ion-text style="color: var(--ion-light-text)">
+        Dein Profilbild ist öffentlich sichtbar.
+      </ion-text>
+      <ion-button shape="round" color="light" expand="block"
+      *ngIf="user?.imageUrl" (click)="finishedAccount()">Speichern</ion-button>
+    </app-layer-card-body>
+  </app-layer-card>
+</ion-content>
