@@ -4,9 +4,9 @@
       <ion-icon name="apps-outline" style="font-size: 1.3rem"></ion-icon>
     </ion-buttons>
     <ion-buttons slot="end" routerLink="/profile">
-      User Name
-      <ion-avatar style="vertical-align: middle; height: 2rem; width: auto; margin-right: 1.4rem; margin-left: 1rem">
-        <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+      {{user?.displayName}}
+      <ion-avatar style="vertical-align: middle; height: 2rem; width: 2rem; margin-right: 1.4rem; margin-left: 1rem">
+        <img [src]="user?.imageUrl">
       </ion-avatar>
     </ion-buttons>
   </ion-toolbar>

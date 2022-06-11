@@ -15,7 +15,11 @@ export class HomePage implements OnInit {
     private datePipe: DatePipe,
     private authService: AuthService,
     private avatarService: AvatarService
-  ) {}
+  ) {
+    this.avatarService.getUserProfile().subscribe(avatar => {
+      this.user = avatar;
+    });
+  }
 
   ngOnInit() {
 
