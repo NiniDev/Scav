@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {AlertController, ToastController} from "@ionic/angular";
 var distance = require('jaro-winkler');
 
 @Component({
@@ -41,7 +42,10 @@ export class SchedulePage implements OnInit {
   subjectKeys = Object.keys(this.subjects);
   filteredSubjectKeys = Object.keys(this.subjects);
 
-  constructor() { }
+  constructor(
+    private alertController: AlertController,
+    private toastController: ToastController,
+  ) { }
 
   ngOnInit() {
   }
@@ -85,5 +89,29 @@ export class SchedulePage implements OnInit {
     const element = document.getElementById('searchSubjects') as HTMLInputElement;
     const searchTerm = element.value;
     this.filteredSubjectKeys = this.search(this.subjectKeys, this.subjects, searchTerm, ['name', 'teacher']);
+  }
+
+  addSubject() {
+    this.alertController.create({
+      header: 'Fach hinzufügen',
+      inputs: [
+        {
+          name: 'name',
+          type: 'text',
+          placeholder: 'Name'
+        },
+        {
+          name: 'abbr',
+          type: 'text',
+          placeholder: 'Fachkürzel'
+        },
+        {
+          name: 'color',
+          type: 'text',
+          placeholder: 'Farbe'
+
+        }
+        ]
+    });
   }
 }
