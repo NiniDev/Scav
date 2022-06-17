@@ -1,0 +1,25 @@
+<ion-content style="--ion-background-color: var(--ion-color-tertiary-shade);">
+  <h1 style="text-align: center">Neues Fach hinzufügen</h1>
+  <ion-list>
+    <ion-item style="color: var(--ion-light-text)">
+      <ion-label>Fach:</ion-label>
+      <ion-input type="text" [(ngModel)]="name"></ion-input>
+    </ion-item>
+    <ion-item style="color: var(--ion-light-text)">
+      <ion-label>Kürzel:</ion-label>
+      <ion-input type="text" [(ngModel)]="abbr"></ion-input>
+    </ion-item>
+    <ion-item style="color: var(--ion-light-text)">
+      <ion-label>Lehrer:</ion-label>
+      <ion-input type="text" [(ngModel)]="teacher"></ion-input>
+    </ion-item>
+    <ion-item style="color: var(--ion-light-text)">
+      <ion-label>Farbe:</ion-label>
+      <input type="color" [(ngModel)]="color">
+    </ion-item>
+  </ion-list>
+
+  <ion-button expand="block" (click)="addSubject()" color="success">Speichern</ion-button>
+  <ion-button expand="block" (click)="cancel()" color="danger">Abbrechen</ion-button>
+
+</ion-content>

@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: SchedulePage
+  },
+  {
+    path: 'modal-add-subject',
+    loadChildren: () => import('./modal-add-subject/modal-add-subject.module').then( m => m.ModalAddSubjectPageModule)
   }
 ];
 
