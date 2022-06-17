@@ -1,6 +1,6 @@
 <ion-content>
   <ion-segment (ionChange)="segmentChanged($event)" value="javascript" color="tertiary"
-               style="--background: var(--ion-color-medium)" value="subjects">
+               style="--background: var(--ion-color-medium)" value="days" mode="md" slot="fixed">
     <ion-segment-button value="timetable" style="color: var(--ion-light-text)">
       <ion-label>Stundenplan</ion-label>
     </ion-segment-button>
@@ -12,12 +12,41 @@
     </ion-segment-button>
   </ion-segment>
 
-  <div *ngIf="segment === 'timetable'" style="color: var(--ion-light-text);"></div>
-  <div *ngIf="segment === 'days'" style="color: var(--ion-light-text);"></div>
-  <div *ngIf="segment === 'subjects'" style="color: var(--ion-light-text); padding-inline: 1rem">
-    <ion-searchbar color="light" (ionInput)="searchSubjects($event)" id="searchSubjects"></ion-searchbar>
-    <ion-list>
-      <ion-card *ngFor="let s of filteredSubjectKeys" style="background: {{subjects[s].color}};">
+  <div *ngIf="segment === 'timetable'" style="color: var(--ion-light-text); padding-inline: 1rem; margin-bottom: 3.5rem; margin-top: 3.5rem"></div>
+  <div *ngIf="segment === 'days'" style="color: var(--ion-light-text); padding-inline: 1rem; margin-bottom: 3.5rem; margin-top: 3.5rem">
+    <ion-card style="margin-inline: 0">
+      <ion-accordion-group mode="ios">
+        <ion-accordion [value]="day" mode="ios" *ngFor="let day of eventDayKeys">
+          <ion-item slot="header" mode="ios">
+            <ion-label mode="ios">{{eventDays[day]}}</ion-label>
+          </ion-item>
+
+          <ion-list slot="content" mode="ios" style=" text-align: center; background: var(--ion-color-tertiary);">
+            <ion-item *ngFor="let e of eventKeys[day]" lines="none"
+                      style="height: {{events[day][e].break ? '1.5rem' : 'fit-content'}}; margin-bottom: {{eventKeys[day].slice(-1) == e ? '0.4rem' : '0'}}">
+              <app-timetable-day-timeslot
+                style="width: 100%"
+                [event]="events[day][e]"
+                [subjects]="subjects"
+                [homework]="{}"
+                *ngIf="!events[day][e].break"
+                opacity="ff"
+              ></app-timetable-day-timeslot>
+              <div *ngIf="events[day][e].break"
+                   style="height: 90%; background: var(--ion-color-medium); width: 100%; color: var(--ion-light-text)">
+                Pause
+              </div>
+            </ion-item>
+            <ion-button color="success" mode="md" style="margin-bottom: .4rem">Hinzufügen</ion-button>
+          </ion-list>
+        </ion-accordion>
+      </ion-accordion-group>
+    </ion-card>
+  </div>
+  <div *ngIf="segment === 'subjects'" style="color: var(--ion-light-text); padding-inline: 1rem; margin-bottom: 3.5rem; margin-top: 3rem">
+    <ion-searchbar color="light" (ionInput)="searchSubjects()" id="searchSubjects" style="padding-inline: 0; padding-bottom: 0"></ion-searchbar>
+    <ion-list style="padding-top: 0">
+      <ion-card *ngFor="let s of filteredSubjectKeys" style="background: {{subjects[s].color}}; margin-inline:0">
         <ion-card-header>
           <ion-card-title style="color: {{contrastColor(subjects[s].color)}};">
             {{subjects[s].name}}

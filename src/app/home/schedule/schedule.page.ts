@@ -10,7 +10,7 @@ const distance = require('jaro-winkler');
   styleUrls: ['./schedule.page.scss'],
 })
 export class SchedulePage implements OnInit {
-  segment = 'subjects';
+  segment = 'days';
   subjects = {
     1: {
       id: 1,
@@ -41,14 +41,483 @@ export class SchedulePage implements OnInit {
       teacher: 'Dr. Mathias4',
     }
   };
+  events = {
+    monday: {
+      1: {
+        id: 1,
+        break: false,
+        start: '08:00',
+        end: '08:45',
+        name: 'Mathe',
+        subject: 1,
+        room: 'A1',
+        slot: 0
+      },
+      2: {
+        id: 2,
+        break: false,
+        start: '08:50',
+        end: '09:35',
+        name: 'Mathe',
+        subject: 1,
+        room: 'A1',
+        slot: 1
+      },
+      3: {
+        id: 3,
+        break: true,
+        duration: 'LONG',
+      },
+      4: {
+        id: 4,
+        break: false,
+        start: '09:55',
+        end: '10:40',
+        name: 'Deutsch',
+        subject: 2,
+        room: 'A2',
+        slot: 2
+      },
+      5: {
+        id: 5,
+        break: false,
+        start: '10:40',
+        end: '11:25',
+        name: 'Deutsch',
+        subject: 2,
+        room: 'A2',
+        slot: 3
+      },
+      6: {
+        id: 6,
+        break: true,
+        duration: 'SHORT',
+      },
+      7: {
+        id: 7,
+        break: false,
+        start: '11:35',
+        end: '12:20',
+        name: 'Physik',
+        subject: 3,
+        room: 'A3',
+        slot: 4
+      },
+      8: {
+        id: 8,
+        break: true,
+        duration: 'LONG',
+      },
+      9: {
+        id: 9,
+        break: false,
+        start: '12:55',
+        end: '13:40',
+        name: 'Sport',
+        subject: 4,
+        room: 'A4',
+        slot: 5
+      },
+      10: {
+        id: 10,
+        break: true,
+        duration: 'SHORT',
+      },
+      11: {
+        id: 11,
+        break: false,
+        start: '13:50',
+        end: '14:35',
+        name: 'Sport',
+        subject: 4,
+        room: 'A4',
+        slot: 6
+      }
+    },
+    tuesday: {
+      1: {
+        id: 1,
+        break: false,
+        start: '08:00',
+        end: '08:45',
+        name: 'Mathe',
+        subject: 1,
+        room: 'A1',
+        slot: 0
+      },
+      2: {
+        id: 2,
+        break: false,
+        start: '08:50',
+        end: '09:35',
+        name: 'Mathe',
+        subject: 1,
+        room: 'A1',
+        slot: 1
+      },
+      3: {
+        id: 3,
+        break: true,
+        duration: 'LONG',
+      },
+      4: {
+        id: 4,
+        break: false,
+        start: '09:55',
+        end: '10:40',
+        name: 'Deutsch',
+        subject: 2,
+        room: 'A2',
+        slot: 2
+      },
+      5: {
+        id: 5,
+        break: false,
+        start: '10:40',
+        end: '11:25',
+        name: 'Deutsch',
+        subject: 2,
+        room: 'A2',
+        slot: 3
+      },
+      6: {
+        id: 6,
+        break: true,
+        duration: 'SHORT',
+      },
+      7: {
+        id: 7,
+        break: false,
+        start: '11:35',
+        end: '12:20',
+        name: 'Physik',
+        subject: 3,
+        room: 'A3',
+        slot: 4
+      },
+      8: {
+        id: 8,
+        break: true,
+        duration: 'LONG',
+      },
+      9: {
+        id: 9,
+        break: false,
+        start: '12:55',
+        end: '13:40',
+        name: 'Sport',
+        subject: 4,
+        room: 'A4',
+        slot: 5
+      },
+      10: {
+        id: 10,
+        break: true,
+        duration: 'SHORT',
+      },
+      11: {
+        id: 11,
+        break: false,
+        start: '13:50',
+        end: '14:35',
+        name: 'Sport',
+        subject: 4,
+        room: 'A4',
+        slot: 6
+      }
+    },
+    wednesday: {
+      1: {
+        id: 1,
+        break: false,
+        start: '08:00',
+        end: '08:45',
+        name: 'Mathe',
+        subject: 1,
+        room: 'A1',
+        slot: 0
+      },
+      2: {
+        id: 2,
+        break: false,
+        start: '08:50',
+        end: '09:35',
+        name: 'Mathe',
+        subject: 1,
+        room: 'A1',
+        slot: 1
+      },
+      3: {
+        id: 3,
+        break: true,
+        duration: 'LONG',
+      },
+      4: {
+        id: 4,
+        break: false,
+        start: '09:55',
+        end: '10:40',
+        name: 'Deutsch',
+        subject: 2,
+        room: 'A2',
+        slot: 2
+      },
+      5: {
+        id: 5,
+        break: false,
+        start: '10:40',
+        end: '11:25',
+        name: 'Deutsch',
+        subject: 2,
+        room: 'A2',
+        slot: 3
+      },
+      6: {
+        id: 6,
+        break: true,
+        duration: 'SHORT',
+      },
+      7: {
+        id: 7,
+        break: false,
+        start: '11:35',
+        end: '12:20',
+        name: 'Physik',
+        subject: 3,
+        room: 'A3',
+        slot: 4
+      },
+      8: {
+        id: 8,
+        break: true,
+        duration: 'LONG',
+      },
+      9: {
+        id: 9,
+        break: false,
+        start: '12:55',
+        end: '13:40',
+        name: 'Sport',
+        subject: 4,
+        room: 'A4',
+        slot: 5
+      },
+      10: {
+        id: 10,
+        break: true,
+        duration: 'SHORT',
+      },
+      11: {
+        id: 11,
+        break: false,
+        start: '13:50',
+        end: '14:35',
+        name: 'Sport',
+        subject: 4,
+        room: 'A4',
+        slot: 6
+      }
+    },
+    thursday: {
+      1: {
+        id: 1,
+        break: false,
+        start: '08:00',
+        end: '08:45',
+        name: 'Mathe',
+        subject: 1,
+        room: 'A1',
+        slot: 0
+      },
+      2: {
+        id: 2,
+        break: false,
+        start: '08:50',
+        end: '09:35',
+        name: 'Mathe',
+        subject: 1,
+        room: 'A1',
+        slot: 1
+      },
+      3: {
+        id: 3,
+        break: true,
+        duration: 'LONG',
+      },
+      4: {
+        id: 4,
+        break: false,
+        start: '09:55',
+        end: '10:40',
+        name: 'Deutsch',
+        subject: 2,
+        room: 'A2',
+        slot: 2
+      },
+      5: {
+        id: 5,
+        break: false,
+        start: '10:40',
+        end: '11:25',
+        name: 'Deutsch',
+        subject: 2,
+        room: 'A2',
+        slot: 3
+      },
+      6: {
+        id: 6,
+        break: true,
+        duration: 'SHORT',
+      },
+      7: {
+        id: 7,
+        break: false,
+        start: '11:35',
+        end: '12:20',
+        name: 'Physik',
+        subject: 3,
+        room: 'A3',
+        slot: 4
+      },
+      8: {
+        id: 8,
+        break: true,
+        duration: 'LONG',
+      },
+      9: {
+        id: 9,
+        break: false,
+        start: '12:55',
+        end: '13:40',
+        name: 'Sport',
+        subject: 4,
+        room: 'A4',
+        slot: 5
+      },
+      10: {
+        id: 10,
+        break: true,
+        duration: 'SHORT',
+      },
+      11: {
+        id: 11,
+        break: false,
+        start: '13:50',
+        end: '14:35',
+        name: 'Sport',
+        subject: 4,
+        room: 'A4',
+        slot: 6
+      }
+    },
+    friday: {
+      1: {
+        id: 1,
+        break: false,
+        start: '08:00',
+        end: '08:45',
+        name: 'Mathe',
+        subject: 1,
+        room: 'A1',
+        slot: 0
+      },
+      2: {
+        id: 2,
+        break: false,
+        start: '08:50',
+        end: '09:35',
+        name: 'Mathe',
+        subject: 1,
+        room: 'A1',
+        slot: 1
+      },
+      3: {
+        id: 3,
+        break: true,
+        duration: 'LONG',
+      },
+      4: {
+        id: 4,
+        break: false,
+        start: '09:55',
+        end: '10:40',
+        name: 'Deutsch',
+        subject: 2,
+        room: 'A2',
+        slot: 2
+      },
+      5: {
+        id: 5,
+        break: false,
+        start: '10:40',
+        end: '11:25',
+        name: 'Deutsch',
+        subject: 2,
+        room: 'A2',
+        slot: 3
+      },
+      6: {
+        id: 6,
+        break: true,
+        duration: 'SHORT',
+      },
+      7: {
+        id: 7,
+        break: false,
+        start: '11:35',
+        end: '12:20',
+        name: 'Physik',
+        subject: 3,
+        room: 'A3',
+        slot: 4
+      },
+      8: {
+        id: 8,
+        break: true,
+        duration: 'LONG',
+      },
+      9: {
+        id: 9,
+        break: false,
+        start: '12:55',
+        end: '13:40',
+        name: 'Sport',
+        subject: 4,
+        room: 'A4',
+        slot: 5
+      },
+      10: {
+        id: 10,
+        break: true,
+        duration: 'SHORT',
+      },
+      11: {
+        id: 11,
+        break: false,
+        start: '13:50',
+        end: '14:35',
+        name: 'Sport',
+        subject: 4,
+        room: 'A4',
+        slot: 6
+      }
+    },
+  };
   subjectKeys = Object.keys(this.subjects);
   filteredSubjectKeys = Object.keys(this.subjects);
+  eventKeys = {};
+  eventDays = {monday: 'Montag', tuesday: 'Dienstag', wednesday: 'Mittwoch', thursday: 'Donnerstag', friday: 'Freitag'};
+  eventDayKeys = Object.keys(this.eventDays);
 
   constructor(
     private alertController: AlertController,
     private toastController: ToastController,
     private modalController: ModalController,
   ) {
+    // eslint-disable-next-line guard-for-in
+    for (const key in this.events) {
+      this.eventKeys[key] = Object.keys(this.events[key]);
+    }
   }
 
   ngOnInit() {

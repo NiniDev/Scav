@@ -23,12 +23,13 @@ import {TimetableDayTimeslotComponent} from '../../components/timetable-day-time
         IonicModule,
         OverviewPageRoutingModule,
     ],
-  exports: [
-    InfoCardComponent,
-    LayerCardComponent,
-    LayerCardHeaderComponent,
-    LayerCardBodyComponent
-  ],
+    exports: [
+        InfoCardComponent,
+        LayerCardComponent,
+        LayerCardHeaderComponent,
+        LayerCardBodyComponent,
+        TimetableDayTimeslotComponent
+    ],
     declarations: [OverviewPage,
       // eslint-disable-next-line max-len
         LayerCardComponent, LayerCardHeaderComponent, LayerCardBodyComponent, TimetableDayComponent, TimetableDayHeaderComponent, TimetableDayBodyComponent, InfoCardComponent, TimetableDayTimeslotComponent
