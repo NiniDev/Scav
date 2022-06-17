@@ -116,3 +116,6 @@ ion-toolbar {
 ion-header {
   background: var(--ion-color-primary-shade);
 }
+.modal-round {
+  --border-radius: 2rem;
+}
