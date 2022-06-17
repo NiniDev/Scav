@@ -9,6 +9,7 @@ export class TimetableDayTimeslotComponent implements OnInit {
   @Input() event;
   @Input() subjects;
   @Input() homework;
+  @Input() opacity = '26';
 
   constructor() { }
 

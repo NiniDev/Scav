@@ -1,7 +1,7 @@
 <ion-row class="timetable-day-timeslot"
          [class.shortbreak]="event.duration === 'SHORT'"
          [class.longbreak]="event.duration === 'LONG'"
-         style="--bg: {{subjects[event?.subject]?.color}}26">
+         style="--bg: {{subjects[event?.subject]?.color}}{{opacity}}">
   <ion-col size="auto" class="timetable-day-timeslot-startend" *ngIf="!event.break">
     {{event.start}} - <br>
     {{event.end}}
