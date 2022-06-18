@@ -46,7 +46,11 @@
                 <ion-reorder slot="end"></ion-reorder>
               </ion-item>
             </ion-reorder-group>
-            <ion-button color="success" mode="md" style="margin-bottom: .4rem" reorder="false">Hinzufügen</ion-button>
+            <ion-button color="success" mode="md" style="margin-bottom: .4rem; margin-inline: 1rem" reorder="false"
+                        expand="block"
+                        (click)="addTimeslot(day)">
+            >Hinzufügen
+            </ion-button>
           </div>
         </ion-accordion>
       </ion-accordion-group>

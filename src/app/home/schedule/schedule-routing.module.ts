@@ -11,6 +11,10 @@ const routes: Routes = [
   {
     path: 'modal-add-subject',
     loadChildren: () => import('./modal-add-subject/modal-add-subject.module').then( m => m.ModalAddSubjectPageModule)
+  },
+  {
+    path: 'modal-add-timeslot',
+    loadChildren: () => import('./modal-add-timeslot/modal-add-timeslot.module').then( m => m.ModalAddTimeslotPageModule)
   }
 ];
 

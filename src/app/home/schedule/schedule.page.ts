@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AlertController, ModalController, ToastController} from '@ionic/angular';
 import {ModalAddSubjectPage} from './modal-add-subject/modal-add-subject.page';
+import {ModalAddTimeslotPage} from './modal-add-timeslot/modal-add-timeslot.page';
 
 const distance = require('jaro-winkler');
 
@@ -43,12 +44,12 @@ export class SchedulePage implements OnInit {
   };
   events = {
     monday: {
-    1011: {
-      id: 1011,
-      break: true,
-      duration: 'SHORT',
-      slot: 9
-    },
+      1011: {
+        id: 1011,
+        break: true,
+        duration: 'SHORT',
+        slot: 9
+      },
       1566: {
         id: 1566,
         break: false,
@@ -607,5 +608,20 @@ export class SchedulePage implements OnInit {
       sortedEvents[key] = this.events[day][key];
     });
     this.events[day] = sortedEvents;
+  }
+
+  async addTimeslot(day) {
+    await this.modalController.create({
+      component: ModalAddTimeslotPage,
+      componentProps: {
+        subjects: this.subjects,
+        subjectKeys: this.subjectKeys,
+      },
+      breakpoints: [0, 0.6],
+      initialBreakpoint: 0.6,
+      cssClass: 'modal-round',
+    }).then(modal => {
+      modal.present();
+    });
   }
 }
