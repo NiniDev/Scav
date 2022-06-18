@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {PopoverController} from '@ionic/angular';
 
 @Component({
   selector: 'app-timetable-day-timeslot',
@@ -10,8 +11,11 @@ export class TimetableDayTimeslotComponent implements OnInit {
   @Input() subjects;
   @Input() homework;
   @Input() opacity = '26';
+  @Input() editable = false;
 
-  constructor() { }
+  constructor(
+    private popoverController: PopoverController
+  ) { }
 
   ngOnInit() {}
 
@@ -19,4 +23,12 @@ export class TimetableDayTimeslotComponent implements OnInit {
     return this.homework.some(h => !h.done);
   }
 
+  dismiss() {
+    this.popoverController.dismiss();
+  }
+
+  save() {
+    // TODO: Save new Time
+    this.dismiss();
+  }
 }

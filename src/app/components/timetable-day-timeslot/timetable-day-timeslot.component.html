@@ -2,7 +2,7 @@
          [class.shortbreak]="event.duration === 'SHORT'"
          [class.longbreak]="event.duration === 'LONG'"
          style="--bg: {{subjects[event?.subject]?.color}}{{opacity}}">
-  <ion-col size="auto" class="timetable-day-timeslot-startend" *ngIf="!event.break">
+  <ion-col size="auto" class="timetable-day-timeslot-startend" *ngIf="!event.break" id="trigger-{{event.id}}">
     {{event.start}} - <br>
     {{event.end}}
   </ion-col>
@@ -17,3 +17,23 @@
     </div>-->
   </ion-col>
 </ion-row>
+<ion-popover trigger="trigger-{{event.id}}" arrow="true" *ngIf="editable">
+  <ng-template style="background: #3AD2A1">
+    <ion-item style="--background: var(--ion-color-light)">
+      <ion-label>Start</ion-label>
+      <ion-input type="time" [value]="event.start"></ion-input>
+    </ion-item>
+    <ion-item style="--background: var(--ion-color-light)">
+      <ion-label>Ende</ion-label>
+      <ion-input type="time" [value]="event.end"></ion-input>
+    </ion-item>
+    <ion-row>
+      <ion-col>
+        <ion-button color="success" expand="block" (click)="save()">Ok</ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button color="warning" (click)="dismiss()">Abbrechen</ion-button>
+      </ion-col>
+    </ion-row>
+  </ng-template>
+</ion-popover>
