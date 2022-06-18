@@ -43,8 +43,14 @@ export class SchedulePage implements OnInit {
   };
   events = {
     monday: {
-      1: {
-        id: 1,
+    1011: {
+      id: 1011,
+      break: true,
+      duration: 'SHORT',
+      slot: 9
+    },
+      1566: {
+        id: 1566,
         break: false,
         start: '08:00',
         end: '08:45',
@@ -67,6 +73,7 @@ export class SchedulePage implements OnInit {
         id: 3,
         break: true,
         duration: 'LONG',
+        slot: 2
       },
       4: {
         id: 4,
@@ -76,7 +83,7 @@ export class SchedulePage implements OnInit {
         name: 'Deutsch',
         subject: 2,
         room: 'A2',
-        slot: 2
+        slot: 3
       },
       5: {
         id: 5,
@@ -86,12 +93,13 @@ export class SchedulePage implements OnInit {
         name: 'Deutsch',
         subject: 2,
         room: 'A2',
-        slot: 3
+        slot: 4
       },
       6: {
         id: 6,
         break: true,
         duration: 'SHORT',
+        slot: 5
       },
       7: {
         id: 7,
@@ -101,12 +109,13 @@ export class SchedulePage implements OnInit {
         name: 'Physik',
         subject: 3,
         room: 'A3',
-        slot: 4
+        slot: 6
       },
       8: {
         id: 8,
         break: true,
         duration: 'LONG',
+        slot: 7
       },
       9: {
         id: 9,
@@ -116,12 +125,7 @@ export class SchedulePage implements OnInit {
         name: 'Sport',
         subject: 4,
         room: 'A4',
-        slot: 5
-      },
-      10: {
-        id: 10,
-        break: true,
-        duration: 'SHORT',
+        slot: 8
       },
       11: {
         id: 11,
@@ -131,7 +135,7 @@ export class SchedulePage implements OnInit {
         name: 'Sport',
         subject: 4,
         room: 'A4',
-        slot: 6
+        slot: 10
       }
     },
     tuesday: {
@@ -517,6 +521,7 @@ export class SchedulePage implements OnInit {
     // eslint-disable-next-line guard-for-in
     for (const key in this.events) {
       this.eventKeys[key] = Object.keys(this.events[key]);
+      this.eventKeys[key].sort((a, b) => this.events[key][a].slot - this.events[key][b].slot);
     }
   }
 
@@ -585,5 +590,25 @@ export class SchedulePage implements OnInit {
         }
       });
     });
+  }
+
+  reorder($event: any, day) {
+    $event.detail.complete();
+    const items = document.getElementsByClassName('monday-order');
+    for (let i = 0; i < items.length; i++) {
+      const item = items[i];
+      const id = item.getAttribute('id');
+      this.events[day][id].slot = i;
+    }
+    this.eventKeys[day].sort((a, b) => this.events[day][a].slot - this.events[day][b].slot);
+    // sort events by slot
+    console.log(this.eventKeys[day]);
+    const sortedEvents = {};
+    this.eventKeys[day].forEach(key => {
+      sortedEvents[key] = this.events[day][key];
+      console.log(key, this.events[day][key]);
+    });
+    this.events[day] = sortedEvents;
+    console.log(sortedEvents);
   }
 }
