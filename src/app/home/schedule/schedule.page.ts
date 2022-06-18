@@ -594,7 +594,7 @@ export class SchedulePage implements OnInit {
 
   reorder($event: any, day) {
     $event.detail.complete();
-    const items = document.getElementsByClassName('monday-order');
+    const items = document.getElementsByClassName(day + '-order');
     for (let i = 0; i < items.length; i++) {
       const item = items[i];
       const id = item.getAttribute('id');
@@ -602,13 +602,10 @@ export class SchedulePage implements OnInit {
     }
     this.eventKeys[day].sort((a, b) => this.events[day][a].slot - this.events[day][b].slot);
     // sort events by slot
-    console.log(this.eventKeys[day]);
     const sortedEvents = {};
     this.eventKeys[day].forEach(key => {
       sortedEvents[key] = this.events[day][key];
-      console.log(key, this.events[day][key]);
     });
     this.events[day] = sortedEvents;
-    console.log(sortedEvents);
   }
 }
