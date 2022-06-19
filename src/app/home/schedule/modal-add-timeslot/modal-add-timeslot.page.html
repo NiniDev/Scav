@@ -47,7 +47,9 @@
       </ion-radio-group>
     </ion-list>
   </ion-list>
-  <ion-button expand="block" (click)="addSubject()" color="success">Speichern</ion-button>
+  <ion-button expand="block" (click)="addSubject()" color="success"
+              [disabled]="!((start && end && type==='subject' && room) || (breakDuration && type==='break'))">Speichern
+  </ion-button>
   <ion-button expand="block" (click)="cancel()" color="danger">Abbrechen</ion-button>
 
 </ion-content>

@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ModalController} from "@ionic/angular";
+import {AlertController, ModalController} from "@ionic/angular";
 
 @Component({
   selector: 'app-modal-add-timeslot',
@@ -18,14 +18,22 @@ export class ModalAddTimeslotPage implements OnInit {
   room;
 
   constructor(
-    private modalController: ModalController
+    private modalController: ModalController,
+    private alertController: AlertController
   ) { }
 
   ngOnInit() {
   }
 
   addSubject() {
-    console.log(this.subject);
+    if (!((this.start && this.end && this.type==='subject' && this.room) || (this.breakDuration && this.type==='break'))) {
+      this.alertController.create({
+        header: 'Es ist ein Fehler aufgetreten',
+        message: 'Füll bitte alle Felder aus',
+        buttons: ['OK']
+      }).then(alert => alert.present());
+      return;
+    }
     this.modalController.dismiss({
       start: this.start,
       end: this.end,
