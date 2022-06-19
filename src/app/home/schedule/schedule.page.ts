@@ -11,7 +11,7 @@ const distance = require('jaro-winkler');
   styleUrls: ['./schedule.page.scss'],
 })
 export class SchedulePage implements OnInit {
-  segment = 'timetable';
+  segment = 'subjects';
   subjects = {
     1: {
       id: 1,
@@ -513,9 +513,10 @@ export class SchedulePage implements OnInit {
   eventKeys = {};
   eventDays = {monday: 'Montag', tuesday: 'Dienstag', wednesday: 'Mittwoch', thursday: 'Donnerstag', friday: 'Freitag'};
   eventDayKeys = Object.keys(this.eventDays);
-  maxSlot= 0;
+  maxSlot = 0;
   maxSlotKeys = [];
   showTime: boolean = false;
+  selectedSubjects: any = [];
 
   constructor(
     private alertController: AlertController,
@@ -577,6 +578,23 @@ export class SchedulePage implements OnInit {
     const element = document.getElementById('searchSubjects') as HTMLInputElement;
     const searchTerm = element.value;
     this.filteredSubjectKeys = this.search(this.subjectKeys, this.subjects, searchTerm, ['name', 'teacher']);
+    // Add selected
+    this.selectedSubjects.forEach(subject => {
+      this.filteredSubjectKeys.push(subject);
+    });
+    // remove empty
+    this.filteredSubjectKeys.forEach(key => {
+      if (!Number.isInteger(Number(key))) {
+        this.filteredSubjectKeys.splice(this.filteredSubjectKeys.indexOf(key), 1);
+      }
+    });
+    // sort by if selected
+    this.filteredSubjectKeys.sort((a, b) => {
+      if (this.selectedSubjects.includes(a) && !this.selectedSubjects.includes(b)) {
+        return -1;
+      } else if (!this.selectedSubjects.includes(a) && this.selectedSubjects.includes(b)) {
+      }
+    });
   }
 
   addSubject() {
@@ -657,5 +675,70 @@ export class SchedulePage implements OnInit {
         }
       });
     });
+  }
+
+  toggleSubjectSelection(subject) {
+    // TODO: add animation
+    if (this.selectedSubjects.includes(subject)) {
+      this.selectedSubjects = this.selectedSubjects.filter(s => s !== subject);
+    } else {
+      this.selectedSubjects.push(subject);
+    }
+  }
+
+  deleteSubjects() {
+    this.alertController.create({
+      header: 'Fächer Löschen',
+      message: 'Möchtest du die ausgewählten Fächer (' +
+        this.selectedSubjects.map(s => this.subjects[s].name).join(', ') +
+        ') löschen?',
+      buttons: [
+        {
+          text: 'Abbrechen',
+          role: 'cancel',
+        },
+        {
+          text: 'Löschen',
+          handler: () => {
+            for (const subject of this.selectedSubjects) {
+              this.deleteSubject(subject);
+            }
+            this.selectedSubjects = [];
+          }
+        }
+      ]
+    }).then(a => a.present());
+  }
+
+  deleteSubject(subjectID) {
+    let usageCount = 0;
+    for (const day in this.events) {
+      for (const event in this.events[day]) {
+        if (this.events[day][event].subject == subjectID) {
+          usageCount++;
+          delete this.events[day][event];
+          console.log("event");
+          this.eventKeys[day] = this.eventKeys[day].filter(key => key !== event);
+        }
+      }
+    }
+    this.toastController.create({
+      message: 'Es wurde ein Zeitraum von deinem Stundenplan entfernt, ' +
+        'da das Fach ' + this.subjects[subjectID].name + ' nicht mehr vorhanden ist. (' + usageCount + ')',
+      duration: 3000,
+      position: 'bottom',
+    }).then(toast => toast.present());
+    delete this.subjects[subjectID];
+    this.subjectKeys = this.subjectKeys.filter(key => key !== subjectID);
+    this.filteredSubjectKeys = this.filteredSubjectKeys.filter(key => key !== subjectID);
+    this.selectedSubjects = this.selectedSubjects.filter(s => s !== subjectID);
+    this.sortEvents();
+  }
+
+  deleteEvent(day, event) {
+    delete this.events[day][event];
+    this.eventKeys[day] = this.eventKeys[day].filter(key => key !== event);
+    this.filteredSubjectKeys = this.filteredSubjectKeys.filter(key => key !== event);
+    this.sortEvents();
   }
 }

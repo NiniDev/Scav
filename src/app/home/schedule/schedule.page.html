@@ -1,6 +1,6 @@
 <ion-content>
   <ion-segment (ionChange)="segmentChanged($event)" color="tertiary"
-               style="--background: var(--ion-color-medium)" value="timetable" mode="md" slot="fixed">
+               style="--background: var(--ion-color-medium)" value="subjects" mode="md" slot="fixed">
     <ion-segment-button value="timetable" style="color: var(--ion-light-text)">
       <ion-label>Stundenplan</ion-label>
     </ion-segment-button>
@@ -65,8 +65,10 @@
                                style=" text-align: center; background: var(--ion-color-tertiary);"
                                disabled="false" (ionItemReorder)="reorder($event, day)">
               <ion-item *ngFor="let e of eventKeys[day]" lines="none"
-                        style="height: {{events[day][e].break ? '1.5rem' : 'fit-content'}}; margin-bottom: {{eventKeys[day].slice(-1) == e ? '0.4rem' : '0'}}"
+                        style="height: {{events[day][e].break ? '2rem' : 'fit-content'}}; margin-bottom: {{eventKeys[day].slice(-1) == e ? '0.4rem' : '0'}}"
                         class="{{day}}-order" [id]="e">
+                <ion-icon name="trash" style=" vertical-align: middle; font-size: 1.4rem" (click)="deleteEvent(day, e)">
+                </ion-icon>
                 <app-timetable-day-timeslot
                   style="width: 100%"
                   [event]="events[day][e]"
@@ -77,7 +79,7 @@
                   editable="true"
                 ></app-timetable-day-timeslot>
                 <div *ngIf="events[day][e].break"
-                     style="height: 90%; background: var(--ion-color-medium); width: 100%; color: var(--ion-light-text)">
+                     style="background: var(--ion-color-medium); width: 100%; color: var(--ion-light-text); vertical-align: middle">
                   Pause
                 </div>
                 <ion-reorder slot="end"></ion-reorder>
@@ -97,16 +99,32 @@
        style="color: var(--ion-light-text); padding-inline: 1rem; margin-bottom: 3.5rem; margin-top: 3rem">
     <ion-searchbar color="light" (ionInput)="searchSubjects()" id="searchSubjects"
                    style="padding-inline: 0; padding-bottom: 0"></ion-searchbar>
+    <ion-button color="danger" *ngIf="selectedSubjects.length > 0" (click)="deleteSubjects()">
+      <ion-icon name="trash" style="color: var(--ion-color-tertiary-contrast); margin-right: 1rem"></ion-icon>
+      Löschen
+    </ion-button>
     <ion-list style="padding-top: 0">
-      <ion-card *ngFor="let s of filteredSubjectKeys" style="background: {{subjects[s].color}}; margin-inline:0">
-        <ion-card-header>
-          <ion-card-title style="color: {{contrastColor(subjects[s].color)}};">
-            {{subjects[s].name}}
-            <ion-badge color="light" mode="ios">{{subjects[s].abbr}}</ion-badge>
-            <ion-badge color="light" mode="ios">{{subjects[s].teacher}}</ion-badge>
-          </ion-card-title>
-        </ion-card-header>
-      </ion-card>
+      {{filteredSubjectKeys | unique}}
+      <div *ngFor="let s of filteredSubjectKeys | unique" (click)="toggleSubjectSelection(s)">
+        <ion-row>
+          <ion-col size="auto" style="display: flex; align-items: center; padding: 0"
+                   *ngIf="selectedSubjects.length > 0">
+            <ion-checkbox color="light" style="--border-color: var(--ion-color-light)"
+                          [checked]="selectedSubjects.includes(s)"></ion-checkbox>
+          </ion-col>
+          <ion-col style="padding: 0 0 0 {{selectedSubjects.length > 0 ? '1rem' : '0'}};">
+            <ion-card style="background: {{subjects[s].color}}; margin-inline:0">
+              <ion-card-header>
+                <ion-card-title style="color: {{contrastColor(subjects[s].color)}};">
+                  {{subjects[s].name}}
+                  <ion-badge color="light" mode="ios">{{subjects[s].abbr}}</ion-badge>
+                  <ion-badge color="light" mode="ios">{{subjects[s].teacher}}</ion-badge>
+                </ion-card-title>
+              </ion-card-header>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </div>
     </ion-list>
     <ion-fab style="right: 1rem; bottom: 3.5rem; position: fixed">
       <ion-fab-button color="light" (click)="addSubject()">
