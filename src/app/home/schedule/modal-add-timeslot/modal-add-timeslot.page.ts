@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {ModalController} from "@ionic/angular";
 
 @Component({
   selector: 'app-modal-add-timeslot',
@@ -14,10 +15,28 @@ export class ModalAddTimeslotPage implements OnInit {
   subject;
   type = 'subject';
   breakDuration = 'short';
+  room;
 
-  constructor() { }
+  constructor(
+    private modalController: ModalController
+  ) { }
 
   ngOnInit() {
   }
 
+  addSubject() {
+    console.log(this.subject);
+    this.modalController.dismiss({
+      start: this.start,
+      end: this.end,
+      subject: this.subject,
+      type: this.type,
+      breakDuration: this.breakDuration,
+      room: this.room
+    }, 'add');
+  }
+
+  cancel() {
+    this.modalController.dismiss({}, 'cancel');
+  }
 }
