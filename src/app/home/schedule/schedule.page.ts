@@ -11,7 +11,7 @@ const distance = require('jaro-winkler');
   styleUrls: ['./schedule.page.scss'],
 })
 export class SchedulePage implements OnInit {
-  segment = 'days';
+  segment = 'timetable';
   subjects = {
     1: {
       id: 1,
@@ -513,6 +513,9 @@ export class SchedulePage implements OnInit {
   eventKeys = {};
   eventDays = {monday: 'Montag', tuesday: 'Dienstag', wednesday: 'Mittwoch', thursday: 'Donnerstag', friday: 'Freitag'};
   eventDayKeys = Object.keys(this.eventDays);
+  maxSlot= 0;
+  maxSlotKeys = [];
+  showTime: boolean = false;
 
   constructor(
     private alertController: AlertController,
@@ -523,6 +526,10 @@ export class SchedulePage implements OnInit {
     for (const key in this.events) {
       this.eventKeys[key] = Object.keys(this.events[key]);
       this.eventKeys[key].sort((a, b) => this.events[key][a].slot - this.events[key][b].slot);
+      if (this.eventKeys[key].length > this.maxSlot) {
+        this.maxSlot = this.eventKeys[key].length;
+        this.maxSlotKeys = Array(this.maxSlot).fill(0).map((_, i) => i);
+      }
     }
   }
 

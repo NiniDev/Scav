@@ -1,6 +1,6 @@
 <ion-content>
-  <ion-segment (ionChange)="segmentChanged($event)" value="javascript" color="tertiary"
-               style="--background: var(--ion-color-medium)" value="days" mode="md" slot="fixed">
+  <ion-segment (ionChange)="segmentChanged($event)" color="tertiary"
+               style="--background: var(--ion-color-medium)" value="timetable" mode="md" slot="fixed">
     <ion-segment-button value="timetable" style="color: var(--ion-light-text)">
       <ion-label>Stundenplan</ion-label>
     </ion-segment-button>
@@ -13,7 +13,44 @@
   </ion-segment>
 
   <div *ngIf="segment === 'timetable'"
-       style="color: var(--ion-light-text); padding-inline: 1rem; margin-bottom: 3.5rem; margin-top: 3.5rem"></div>
+       style="color: var(--ion-light-text); margin-bottom: 3.5rem; margin-top: 3.5rem">
+    <ion-grid style="text-align: center">
+      <ion-row style="background: var(--ion-color-tertiary)">
+        <ion-col>
+          <ion-label>Mo</ion-label>
+        </ion-col>
+        <ion-col>
+          <ion-label>Di</ion-label>
+        </ion-col>
+        <ion-col>
+          <ion-label>Mi</ion-label>
+        </ion-col>
+        <ion-col>
+          <ion-label>Do</ion-label>
+        </ion-col>
+        <ion-col>
+          <ion-label>Fr</ion-label>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngFor="let e of maxSlotKeys" style="margin-bottom: .1rem">
+        <ion-col *ngFor="let d of eventDayKeys"
+                 style="background: {{subjects[events[d][eventKeys[d][e]]?.subject]?.color}}26">
+          {{subjects[events[d][eventKeys[d][e]]?.subject]?.abbr}} <br *ngIf="!events[d][eventKeys[d][e]]?.break">
+          <span *ngIf="!events[d][eventKeys[d][e]]?.break && events[d][eventKeys[d][e]]?.slot > -1 && showTime"
+                style="font-size: .5rem;">
+            {{events[d][eventKeys[d][e]]?.start}}-
+            {{events[d][eventKeys[d][e]]?.end}}
+          </span>
+          <span *ngIf="events[d][eventKeys[d][e]]?.break">Pause</span>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-fab style="right: 1rem; bottom: 3.5rem; position: fixed">
+      <ion-fab-button (click)="showTime = !showTime">
+        <ion-icon name="toggle" style="transform: {{showTime ? 'rotate(0)' : 'rotate(180deg)'}}"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  </div>
   <div *ngIf="segment === 'days'"
        style="color: var(--ion-light-text); padding-inline: 1rem; margin-bottom: 3.5rem; margin-top: 3.5rem">
     <ion-card style="margin-inline: 0">
@@ -71,7 +108,7 @@
         </ion-card-header>
       </ion-card>
     </ion-list>
-    <ion-fab style="right: 1rem; bottom: 3.5rem">
+    <ion-fab style="right: 1rem; bottom: 3.5rem; position: fixed">
       <ion-fab-button color="light" (click)="addSubject()">
         <ion-icon name="add"></ion-icon>
       </ion-fab-button>
