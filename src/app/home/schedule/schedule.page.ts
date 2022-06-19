@@ -126,7 +126,7 @@ export class SchedulePage implements OnInit {
         name: 'Sport',
         subject: 4,
         room: 'A4',
-        slot: 8
+        slot: 17
       },
       11: {
         id: 11,
@@ -622,6 +622,29 @@ export class SchedulePage implements OnInit {
       cssClass: 'modal-round',
     }).then(modal => {
       modal.present();
+      modal.onDidDismiss().then(result => {
+        if (result.role !== 'cancel' && result.data) {
+          const timeslot = {};
+          if (result.data.type === 'break') {
+            timeslot['break'] = true;
+            timeslot['duration'] = result.data.breakDuration;
+          }
+          if (result.data.type === 'subject') {
+            timeslot['break'] = false;
+            timeslot['start'] = result.data.start;
+            timeslot['end'] = result.data.end;
+            timeslot['name'] = this.subjects[result.data.subject].name;
+            timeslot['subject'] = result.data.subject;
+            timeslot['room'] = result.data.room;
+          }
+          const prevSlot = this.events[day][this.eventKeys[day][this.eventKeys[day].length - 1]].slot
+          timeslot['slot'] = prevSlot + 1;
+          const id = this.eventKeys[day].length + 1; // TODO: let firebase generate id
+          this.events[day][id] = timeslot;
+          this.eventKeys[day].push(id.toString());
+          this.filteredSubjectKeys.push(id.toString());
+        }
+      });
     });
   }
 }
