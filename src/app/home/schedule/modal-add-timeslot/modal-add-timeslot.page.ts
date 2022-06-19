@@ -20,13 +20,13 @@ export class ModalAddTimeslotPage implements OnInit {
   constructor(
     private modalController: ModalController,
     private alertController: AlertController
-  ) { }
+  ) {}
 
   ngOnInit() {
   }
 
   addSubject() {
-    if (!((this.start && this.end && this.type==='subject' && this.room) || (this.breakDuration && this.type==='break'))) {
+    if (!((this.start && this.end && this.type === 'subject' && this.room) || (this.breakDuration && this.type === 'break'))) {
       this.alertController.create({
         header: 'Es ist ein Fehler aufgetreten',
         message: 'Füll bitte alle Felder aus',

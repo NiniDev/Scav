@@ -19,7 +19,7 @@
     </ion-item>
   </ion-list>
 
-  <ion-button expand="block" (click)="addSubject()" color="success">Speichern</ion-button>
+  <ion-button expand="block" (click)="addSubject()" color="success" [disabled]="!(this.name && this.teacher && this.abbr && this.color)">Speichern</ion-button>
   <ion-button expand="block" (click)="cancel()" color="danger">Abbrechen</ion-button>
 
 </ion-content>

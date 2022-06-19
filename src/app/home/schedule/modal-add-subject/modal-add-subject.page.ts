@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ModalController} from '@ionic/angular';
+import {AlertController, ModalController} from '@ionic/angular';
 
 @Component({
   selector: 'app-modal-add-subject',
@@ -14,6 +14,7 @@ export class ModalAddSubjectPage implements OnInit {
 
   constructor(
     private modalController: ModalController,
+    private alertController: AlertController
   ) { }
 
   ngOnInit() {
@@ -24,6 +25,14 @@ export class ModalAddSubjectPage implements OnInit {
   }
 
   addSubject() {
+    if (!(this.name && this.teacher && this.abbr && this.color)) {
+      this.alertController.create({
+        header: 'Es ist ein Fehler aufgetreten',
+        message: 'Füll bitte alle Felder aus',
+        buttons: ['OK']
+      }).then(alert => alert.present());
+      return;
+    }
     this.modalController.dismiss({
       name: this.name,
       teacher: this.teacher,

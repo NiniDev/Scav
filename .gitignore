@@ -30,3 +30,7 @@ npm-debug.log*
 /platforms
 /plugins
 /www
+/android/app/src/main/res/mipmap-xhdpi/ic_launcher_background.png
+/android/app/src/main/res/mipmap-xxhdpi/ic_launcher_background.png
+/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher_background.png
+/android/app/src/main/java/com/ninidev/scav/MainActivity.java
