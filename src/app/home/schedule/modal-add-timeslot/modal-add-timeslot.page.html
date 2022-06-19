@@ -22,7 +22,7 @@
       <ion-input type="time" [(ngModel)]="end"></ion-input>
     </ion-item>
     <ion-item style="color: var(--ion-light-text)" *ngIf="type === 'subject'">
-      <ion-label>Gender</ion-label>
+      <ion-label>Fach</ion-label>
       <ion-select placeholder="Fach auswählen" interface="popover" [(ngModel)]="subject">
         <ion-select-option *ngFor="let s of subjectKeys">
           {{subjects[s].name}} ({{subjects[s].teacher}})
