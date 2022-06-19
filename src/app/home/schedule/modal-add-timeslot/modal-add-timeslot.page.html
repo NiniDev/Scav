@@ -24,11 +24,16 @@
     <ion-item style="color: var(--ion-light-text)" *ngIf="type === 'subject'">
       <ion-label>Fach</ion-label>
       <ion-select placeholder="Fach auswählen" interface="popover" [(ngModel)]="subject">
-        <ion-select-option *ngFor="let s of subjectKeys">
+        <ion-select-option *ngFor="let s of subjectKeys" [value]="s">
           {{subjects[s].name}} ({{subjects[s].teacher}})
         </ion-select-option>
       </ion-select>
     </ion-item>
+    <ion-item style="color: var(--ion-light-text)" *ngIf="type === 'subject'">
+      <ion-label>Raum:</ion-label>
+      <ion-input type="text" [(ngModel)]="room"></ion-input>
+    </ion-item>
+
     <ion-list *ngIf="type === 'break'">
       <ion-radio-group value="short" [(ngModel)]="breakDuration">
         <ion-radio slot="start" value="short"
