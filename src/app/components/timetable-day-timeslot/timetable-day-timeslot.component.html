@@ -8,7 +8,7 @@
   </ion-col>
   <ion-col class="timetable-day-timeslot-info" *ngIf="!event.break">
     <ion-label class="timetable-day-timeslot-label">
-      {{subjects[event.subject].name}}
+      {{subjects[event.subject].name}} <span>({{event.room}})</span>
     </ion-label>
     <div class="indicator-point" color="tertiary" icon *ngIf="homework.length > 0">
       <ion-icon name="alert" *ngIf="hasUnfinishedHomework()"></ion-icon>
