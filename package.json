@@ -31,6 +31,7 @@
     "@ionic/angular": "^6.0.0",
     "@supabase/supabase-js": "^1.35.3",
     "jaro-winkler": "^0.2.8",
+    "ngx-pipes": "^3.0.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.2.0",
     "zone.js": "~0.11.4"
