@@ -36,9 +36,9 @@
         <ion-col *ngFor="let d of eventDayKeys"
                  style="background: {{subjects[events[d][eventKeys[d][e]]?.subject]?.color}}26">
           {{subjects[events[d][eventKeys[d][e]]?.subject]?.abbr}} <br *ngIf="!events[d][eventKeys[d][e]]?.break">
-          <span *ngIf="!events[d][eventKeys[d][e]]?.break && events[d][eventKeys[d][e]]?.slot > -1 && showTime"
+          <span *ngIf="!events[d][eventKeys[d][e]]?.break && events[d][eventKeys[d][e]]?.slot && showTime"
                 style="font-size: .5rem;">
-            {{events[d][eventKeys[d][e]]?.start}}-
+            {{events[d][eventKeys[d][e]]?.start}} -
             {{events[d][eventKeys[d][e]]?.end}}
           </span>
           <span *ngIf="events[d][eventKeys[d][e]]?.break">Pause</span>
