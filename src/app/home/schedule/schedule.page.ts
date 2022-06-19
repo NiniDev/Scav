@@ -48,7 +48,7 @@ export class SchedulePage implements OnInit {
         id: 1011,
         break: true,
         duration: 'SHORT',
-        slot: 9
+        slot: 10
       },
       1566: {
         id: 1566,
@@ -522,7 +522,10 @@ export class SchedulePage implements OnInit {
     private toastController: ToastController,
     private modalController: ModalController,
   ) {
-    // eslint-disable-next-line guard-for-in
+    this.sortEvents();
+  }
+
+  sortEvents() {
     for (const key in this.events) {
       this.eventKeys[key] = Object.keys(this.events[key]);
       this.eventKeys[key].sort((a, b) => this.events[key][a].slot - this.events[key][b].slot);
@@ -650,6 +653,7 @@ export class SchedulePage implements OnInit {
           this.events[day][id] = timeslot;
           this.eventKeys[day].push(id.toString());
           this.filteredSubjectKeys.push(id.toString());
+          this.sortEvents();
         }
       });
     });
