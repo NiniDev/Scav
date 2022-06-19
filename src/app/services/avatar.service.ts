@@ -16,6 +16,10 @@ export class AvatarService {
   ) {
   }
 
+  getUser() {
+    return this.auth.currentUser;
+  }
+
   getUserProfile() {
     const user = this.auth.currentUser;
     const userDocRef = doc(this.firestore, `users/${user.uid}`);
