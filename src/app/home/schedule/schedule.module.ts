@@ -7,7 +7,8 @@ import { IonicModule } from '@ionic/angular';
 import { SchedulePageRoutingModule } from './schedule-routing.module';
 
 import { SchedulePage } from './schedule.page';
-import {OverviewPageModule} from "../overview/overview.module";
+import {OverviewPageModule} from '../overview/overview.module';
+import {NgPipesModule} from 'ngx-pipes';
 
 @NgModule({
     imports: [
@@ -15,7 +16,8 @@ import {OverviewPageModule} from "../overview/overview.module";
         FormsModule,
         IonicModule,
         SchedulePageRoutingModule,
-        OverviewPageModule
+        OverviewPageModule,
+        NgPipesModule
     ],
   declarations: [SchedulePage]
 })
