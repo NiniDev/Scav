@@ -1,9 +1,48 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>modal-add-timeslot</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content style="--ion-background-color: var(--ion-color-tertiary-shade);">
+  <h1 style="text-align: center">Zeitraum einfügen</h1>
+  <ion-list>
+    <ion-list>
+      <ion-radio-group value="subject" [(ngModel)]="type">
+        <ion-radio slot="start" value="break"
+                   style="vertical-align: middle; margin-left: 1rem; margin-right: .3rem"></ion-radio>
+        <ion-label style="vertical-align: middle">Pause</ion-label>
 
-<ion-content>
+        <ion-radio slot="start" value="subject"
+                   style="vertical-align: middle; margin-left: 1rem; margin-right: .3rem"></ion-radio>
+        <ion-label style="vertical-align: middle">Fach</ion-label>
+
+      </ion-radio-group>
+    </ion-list>
+    <ion-item style="color: var(--ion-light-text)" *ngIf="type === 'subject'">
+      <ion-label>Start:</ion-label>
+      <ion-input type="time" [(ngModel)]="start"></ion-input>
+    </ion-item>
+    <ion-item style="color: var(--ion-light-text)" *ngIf="type === 'subject'">
+      <ion-label>Ende:</ion-label>
+      <ion-input type="time" [(ngModel)]="end"></ion-input>
+    </ion-item>
+    <ion-item style="color: var(--ion-light-text)" *ngIf="type === 'subject'">
+      <ion-label>Gender</ion-label>
+      <ion-select placeholder="Fach auswählen" interface="popover" [(ngModel)]="subject">
+        <ion-select-option *ngFor="let s of subjectKeys">
+          {{subjects[s].name}} ({{subjects[s].teacher}})
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-list *ngIf="type === 'break'">
+      <ion-radio-group value="short" [(ngModel)]="breakDuration">
+        <ion-radio slot="start" value="short"
+                   style="vertical-align: middle; margin-left: 1rem; margin-right: .3rem"></ion-radio>
+        <ion-label style="vertical-align: middle">Kurz</ion-label>
+
+        <ion-radio slot="start" value="long"
+                   style="vertical-align: middle; margin-left: 1rem; margin-right: .3rem"></ion-radio>
+        <ion-label style="vertical-align: middle">Lang</ion-label>
+
+      </ion-radio-group>
+    </ion-list>
+  </ion-list>
+  <ion-button expand="block" (click)="addSubject()" color="success">Speichern</ion-button>
+  <ion-button expand="block" (click)="cancel()" color="danger">Abbrechen</ion-button>
 
 </ion-content>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-modal-add-timeslot',
@@ -6,6 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./modal-add-timeslot.page.scss'],
 })
 export class ModalAddTimeslotPage implements OnInit {
+  @Input() subjects: any;
+  @Input() subjectKeys: any;
+
+  start = '08:00';
+  end = '08:45';
+  subject;
+  type = 'subject';
+  breakDuration = 'short';
 
   constructor() { }
 
