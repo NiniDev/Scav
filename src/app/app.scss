@@ -119,3 +119,7 @@ ion-header {
 .modal-round {
   --border-radius: 2rem;
 }
+
+ion-menu {
+  --background: var(--ion-color-primary-shade) !important;
+}

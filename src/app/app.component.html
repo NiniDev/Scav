@@ -1,3 +1,60 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <ion-menu side="start" menuId="first" contentId="main">
+    <ion-header>
+      <ion-toolbar color="tertiary">
+        <ion-title>Menu</ion-title>
+        <ion-menu-toggle slot="end" style="margin-right: 1.4rem">
+          <ion-icon name="chevron-back" style="font-size: 1.3rem"></ion-icon>
+        </ion-menu-toggle>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content style="top: 2rem; text-align: center;">
+      <ion-menu-toggle>
+        <ion-avatar style="margin-inline: auto" routerLink="profile">
+          <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+        </ion-avatar>
+      </ion-menu-toggle>
+      <ion-label style="font-size: 1.5rem; color: var(--ion-light-text)">Test</ion-label>
+      <br>
+      <ion-label style="font-size: 0.8rem; color: var(--ion-light-text)">mytestmail@testmail.de</ion-label>
+      <ion-list style="color: var(--ion-light-text);">
+        <ion-menu-toggle>
+          <ion-item style="color: var(--ion-light-text); font-size: 1.3rem">
+            Einrichtung
+            <ion-icon name="calendar" slot="start" color="tertiary"></ion-icon>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item style="color: var(--ion-light-text); font-size: 1.3rem" routerLink="profile">
+            Profil
+            <ion-icon name="person" slot="start" color="tertiary"></ion-icon>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item style="color: var(--ion-light-text); font-size: 1.3rem">
+            Einstellungen
+            <ion-icon name="settings" slot="start" color="tertiary"></ion-icon>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item style="color: var(--ion-light-text); font-size: 1.3rem" href="https://discord.gg/FXxDhEVFZQ">
+            Feedback
+            <ion-icon name="logo-discord" slot="start" color="tertiary"></ion-icon>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item style="color: var(--ion-light-text); font-size: 1.3rem">
+            Logout
+            <ion-icon name="log-out" slot="start" color="danger"></ion-icon>
+          </ion-item>
+        </ion-menu-toggle>
+      </ion-list>
+    </ion-content>
+    <ion-footer collapse="fade">
+      <ion-toolbar style="text-align: center; font-weight: 200; color: lightslategray">
+        Scav - Version 1.0
+      </ion-toolbar>
+    </ion-footer>
+  </ion-menu>
+  <ion-router-outlet id="main"></ion-router-outlet>
 </ion-app>
