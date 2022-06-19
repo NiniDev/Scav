@@ -1,9 +1,20 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>upcoming</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-
-</ion-content>
+<app-layer-card top="0">
+  <app-layer-card-header header_height="3.5rem" fade="fade">Anstehende Aufgaben</app-layer-card-header>
+  <app-layer-card-body fade_header="fade" fade_header_height="3.5rem">
+    <app-info-card *ngFor="let hw of getOrderedHomework()" padding="1rem">
+      <ion-label>
+        {{hw.title}}
+        <ion-badge style="background: {{subjects[hw.subject].color}}" mode="ios">
+          {{subjects[hw.subject].abbr}}
+        </ion-badge>
+        <ion-badge mode="ios" color="light">
+          {{getDiffDays(hw.untilDate)}} Tage
+        </ion-badge>
+        <ion-badge color="primary" mode="ios">HA</ion-badge>
+      </ion-label>
+      <p style="margin: 0">
+        {{hw.description}}
+      </p>
+    </app-info-card>
+  </app-layer-card-body>
+</app-layer-card>
