@@ -11,10 +11,10 @@
     <ion-content style="top: 2rem; text-align: center;">
       <ion-menu-toggle>
         <ion-avatar style="margin-inline: auto" routerLink="profile">
-          <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+          <img [src]="user?.imageUrl">
         </ion-avatar>
       </ion-menu-toggle>
-      <ion-label style="font-size: 1.5rem; color: var(--ion-light-text)">Test</ion-label>
+      <ion-label style="font-size: 1.5rem; color: var(--ion-light-text)">{{user?.displayName}}</ion-label>
       <br>
       <ion-label style="font-size: 0.8rem; color: var(--ion-light-text)">mytestmail@testmail.de</ion-label>
       <ion-list style="color: var(--ion-light-text);">
