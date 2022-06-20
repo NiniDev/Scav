@@ -104,7 +104,6 @@
       Löschen
     </ion-button>
     <ion-list style="padding-top: 0">
-      {{filteredSubjectKeys | unique}}
       <div *ngFor="let s of filteredSubjectKeys | unique" (click)="toggleSubjectSelection(s)">
         <ion-row>
           <ion-col size="auto" style="display: flex; align-items: center; padding: 0"
