@@ -4,7 +4,8 @@ const config: CapacitorConfig = {
   appId: 'io.ionic.starter',
   appName: 'Scav',
   webDir: 'www',
-  bundledWebRuntime: false
+  bundledWebRuntime: false,
+  backgroundColor: '#ff0000',
 };
 
 export default config;
