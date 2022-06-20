@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AlertController, ModalController, ToastController} from '@ionic/angular';
 import {ModalAddSubjectPage} from './modal-add-subject/modal-add-subject.page';
 import {ModalAddTimeslotPage} from './modal-add-timeslot/modal-add-timeslot.page';
+import {DataService} from "../../services/data.service";
 
 const distance = require('jaro-winkler');
 
@@ -12,36 +13,7 @@ const distance = require('jaro-winkler');
 })
 export class SchedulePage implements OnInit {
   segment = 'subjects';
-  subjects = {
-    1: {
-      id: 1,
-      name: 'Mathe',
-      abbr: 'Ma',
-      color: '#0000ff',
-      teacher: 'Dr. Mathias',
-    },
-    2: {
-      id: 2,
-      name: 'Deutsch',
-      abbr: 'De',
-      color: '#ff0000',
-      teacher: 'Dr. Mathias2',
-    },
-    3: {
-      id: 3,
-      name: 'Physik',
-      abbr: 'Ph',
-      color: '#b700ff',
-      teacher: 'Dr. Mathias3',
-    },
-    4: {
-      id: 4,
-      name: 'Sport',
-      abbr: 'Sp',
-      color: '#ffffff',
-      teacher: 'Dr. Mathias4',
-    }
-  };
+  subjects = {};
   events = {
     monday: {
       1011: {
@@ -522,8 +494,23 @@ export class SchedulePage implements OnInit {
     private alertController: AlertController,
     private toastController: ToastController,
     private modalController: ModalController,
+    private dataService: DataService,
   ) {
     this.sortEvents();
+    this.dataService.isReady.subscribe((r) => {
+      if (!r) {return;}
+      this.dataService.getSubjects().subscribe(subjects => {
+        this.subjects = {};
+        for (const key in subjects) {
+          if (subjects.hasOwnProperty(key)) {
+            this.subjects[subjects[key].id] = subjects[key];
+          }
+        }
+        this.subjectKeys = Object.keys(this.subjects);
+        this.filteredSubjectKeys = Object.keys(this.subjects);
+        console.log(this.subjects);
+      });
+    });
   }
 
   sortEvents() {
@@ -584,7 +571,7 @@ export class SchedulePage implements OnInit {
     });
     // remove empty
     this.filteredSubjectKeys.forEach(key => {
-      if (!Number.isInteger(Number(key))) {
+      if (key.length < 0) {
         this.filteredSubjectKeys.splice(this.filteredSubjectKeys.indexOf(key), 1);
       }
     });
@@ -611,11 +598,16 @@ export class SchedulePage implements OnInit {
       modal.present();
       modal.onDidDismiss().then(result => {
         if (result.role !== 'cancel' && result.data) {
-          const subject = result.data;
-          subject.id = this.subjectKeys.length + 1;
-          this.subjects[subject.id] = subject;
-          this.subjectKeys.push(subject.id.toString());
-          this.filteredSubjectKeys.push(subject.id.toString());
+          this.dataService.addSubject(result.data).then(() => {
+            this.toastController.create({
+              message: 'Fach hinzugefügt',
+              duration: 4000,
+              position: 'bottom',
+              color: 'success'
+            }).then(toast => {
+              toast.present();
+            });
+          });
         }
       });
     });
@@ -728,10 +720,7 @@ export class SchedulePage implements OnInit {
       duration: 3000,
       position: 'bottom',
     }).then(toast => toast.present());
-    delete this.subjects[subjectID];
-    this.subjectKeys = this.subjectKeys.filter(key => key !== subjectID);
-    this.filteredSubjectKeys = this.filteredSubjectKeys.filter(key => key !== subjectID);
-    this.selectedSubjects = this.selectedSubjects.filter(s => s !== subjectID);
+    this.dataService.deleteSubject(subjectID);
     this.sortEvents();
   }
 
