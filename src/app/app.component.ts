@@ -20,7 +20,7 @@ export class AppComponent {
           this.user = avatar;
           console.log(this.user);
         });
-      }, 1000);
+      }, 2000);
     });
   }
 }
