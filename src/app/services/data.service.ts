@@ -52,4 +52,10 @@ export class DataService {
     const que = query(eventsRef, where('user', '==', this.user.uid));
     return collectionData(que, {idField: 'id'});
   }
+
+  addEvent(event) {
+    event.user = this.user.uid;
+    const eventRef = collection(this.firestore, `events`);
+    return addDoc(eventRef, event);
+  }
 }
