@@ -12,7 +12,7 @@ const distance = require('jaro-winkler');
   styleUrls: ['./schedule.page.scss'],
 })
 export class SchedulePage implements OnInit {
-  segment = 'subjects';
+  segment = 'timetable';
 
   subjects = {};
   subjectKeys = Object.keys(this.subjects);
@@ -53,14 +53,16 @@ export class SchedulePage implements OnInit {
 
       dataService.getEvents().subscribe(events => {
         this.events = {};
+        this.eventKeys = [];
         for (const key in events) {
           if (events.hasOwnProperty(key)) {
             if (!this.events[events[key].day]) {this.events[events[key].day] = {};}
+            if (!this.eventKeys[events[key].day]) {this.eventKeys[events[key].day] = [];}
             this.events[events[key].day][events[key].id] = events[key];
+            this.eventKeys[events[key].day].push(events[key].id);
           }
         }
-        this.eventKeys = Object.keys(events);
-        this.sortEvents()
+        this.sortEvents();
       });
     });
   }
@@ -211,11 +213,17 @@ export class SchedulePage implements OnInit {
           }
           const prevSlot = this.events[day][this.eventKeys[day][this.eventKeys[day].length - 1]].slot
           timeslot['slot'] = prevSlot + 1;
-          const id = this.eventKeys[day].length + 1; // TODO: let firebase generate id
-          this.events[day][id] = timeslot;
-          this.eventKeys[day].push(id.toString());
-          this.filteredSubjectKeys.push(id.toString());
-          this.sortEvents();
+          timeslot['day'] = day;
+          this.dataService.addEvent(timeslot).then(() => {
+            this.toastController.create({
+              message: 'Event hinzugefügt',
+              duration: 4000,
+              position: 'bottom',
+              color: 'success'
+            }).then(toast => {
+              toast.present();
+            });
+          });
         }
       });
     });
