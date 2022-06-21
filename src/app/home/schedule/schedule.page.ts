@@ -714,12 +714,14 @@ export class SchedulePage implements OnInit {
         }
       }
     }
-    this.toastController.create({
-      message: 'Es wurde ein Zeitraum von deinem Stundenplan entfernt, ' +
-        'da das Fach ' + this.subjects[subjectID].name + ' nicht mehr vorhanden ist. (' + usageCount + ')',
-      duration: 3000,
-      position: 'bottom',
-    }).then(toast => toast.present());
+    if (usageCount > 0) {
+      this.toastController.create({
+        message: 'Es wurde ein Zeitraum von deinem Stundenplan entfernt, ' +
+          'da das Fach ' + this.subjects[subjectID].name + ' nicht mehr vorhanden ist. (' + usageCount + ')',
+        duration: 3000,
+        position: 'bottom',
+      }).then(toast => toast.present());
+    }
     this.dataService.deleteSubject(subjectID);
     this.sortEvents();
   }
