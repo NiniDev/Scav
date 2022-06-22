@@ -12,7 +12,7 @@ const distance = require('jaro-winkler');
   styleUrls: ['./schedule.page.scss'],
 })
 export class SchedulePage implements OnInit {
-  segment = 'timetable';
+  segment = 'subjects';
 
   subjects = {};
   subjectKeys = Object.keys(this.subjects);
@@ -29,6 +29,8 @@ export class SchedulePage implements OnInit {
   maxSlotKeys = [];
   showTime: boolean = false;
 
+  subjectHold;
+
   constructor(
     private alertController: AlertController,
     private toastController: ToastController,
@@ -37,7 +39,9 @@ export class SchedulePage implements OnInit {
   ) {
     this.sortEvents();
     this.dataService.isReady.subscribe((r) => {
-      if (!r) {return;}
+      if (!r) {
+        return;
+      }
       // get subjects
       this.dataService.getSubjects().subscribe(subjects => {
         this.subjects = {};
@@ -56,8 +60,12 @@ export class SchedulePage implements OnInit {
         this.eventKeys = [];
         for (const key in events) {
           if (events.hasOwnProperty(key)) {
-            if (!this.events[events[key].day]) {this.events[events[key].day] = {};}
-            if (!this.eventKeys[events[key].day]) {this.eventKeys[events[key].day] = [];}
+            if (!this.events[events[key].day]) {
+              this.events[events[key].day] = {};
+            }
+            if (!this.eventKeys[events[key].day]) {
+              this.eventKeys[events[key].day] = [];
+            }
             this.events[events[key].day][events[key].id] = events[key];
             this.eventKeys[events[key].day].push(events[key].id);
           }
@@ -231,6 +239,14 @@ export class SchedulePage implements OnInit {
 
   toggleSubjectSelection(subject) {
     // TODO: add animation
+    const oldDate = this.subjectHold;
+    this.subjectHold = new Date();
+    if (this.selectedSubjects.length > 0) {
+    } else {
+      if (!(this.subjectHold - oldDate > 450)) {
+        return;
+      }
+    }
     if (this.selectedSubjects.includes(subject)) {
       this.selectedSubjects = this.selectedSubjects.filter(s => s !== subject);
     } else {
@@ -291,5 +307,9 @@ export class SchedulePage implements OnInit {
     this.eventKeys[day] = this.eventKeys[day].filter(key => key !== event);
     this.filteredSubjectKeys = this.filteredSubjectKeys.filter(key => key !== event);
     this.sortEvents();
+  }
+
+  subjectDown() {
+    this.subjectHold = new Date();
   }
 }
