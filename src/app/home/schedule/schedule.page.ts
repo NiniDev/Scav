@@ -52,7 +52,6 @@ export class SchedulePage implements OnInit {
         }
         this.subjectKeys = Object.keys(this.subjects);
         this.filteredSubjectKeys = Object.keys(this.subjects);
-        console.log(this.subjects);
       });
 
       dataService.getEvents().subscribe(events => {
