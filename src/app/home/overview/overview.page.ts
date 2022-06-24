@@ -1,138 +1,15 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
-enum COLORS {
-  MATH = '#0000ff',
-  GERMAN = '#ff0000',
-  PHYSICS = '#b700ff',
-  PHYSICALEDUCATION = '#ffffff',
-}
+import {DataService} from '../../services/data.service';
+
 @Component({
   selector: 'app-overview',
   templateUrl: './overview.page.html',
   styleUrls: ['./overview.page.scss'],
 })
-export class OverviewPage implements AfterViewInit {
-  subjects = {
-    1: {
-      id: 1,
-      name: 'Mathe',
-      abbr: 'Ma',
-      color: COLORS.MATH,
-      teacher: 'Dr. Mathias',
-    },
-    2: {
-      id: 2,
-      name: 'Deutsch',
-      abbr: 'De',
-      color: COLORS.GERMAN,
-      teacher: 'Dr. Mathias2',
-    },
-    3: {
-      id: 3,
-      name: 'Physik',
-      abbr: 'Ph',
-      color: COLORS.PHYSICS,
-      teacher: 'Dr. Mathias3',
-    },
-    4: {
-      id: 4,
-      name: 'Sport',
-      abbr: 'Sp',
-      color: COLORS.PHYSICALEDUCATION,
-      teacher: 'Dr. Mathias4',
-    }
-  };
-  events = {
-    1: {
-      id: 1,
-      break: false,
-      start: '08:00',
-      end: '08:45',
-      name: 'Mathe',
-      subject: 1,
-      room: 'A1',
-      slot: 0
-    },
-    2: {
-      id: 2,
-      break: false,
-      start: '08:50',
-      end: '09:35',
-      name: 'Mathe',
-      subject: 1,
-      room: 'A1',
-      slot: 1
-    },
-    3: {
-      id: 3,
-      break: true,
-      duration: 'LONG',
-    },
-    4: {
-      id: 4,
-      break: false,
-      start: '09:55',
-      end: '10:40',
-      name: 'Deutsch',
-      subject: 2,
-      room: 'A2',
-      slot: 2
-    },
-    5: {
-      id: 5,
-      break: false,
-      start: '10:40',
-      end: '11:25',
-      name: 'Deutsch',
-      subject: 2,
-      room: 'A2',
-      slot: 3
-    },
-    6: {
-      id: 6,
-      break: true,
-      duration: 'SHORT',
-    },
-    7: {
-      id: 7,
-      break: false,
-      start: '11:35',
-      end: '12:20',
-      name: 'Physik',
-      subject: 3,
-      room: 'A3',
-      slot: 4
-    },
-    8: {
-      id: 8,
-      break: true,
-      duration: 'LONG',
-    },
-    9: {
-      id: 9,
-      break: false,
-      start: '12:55',
-      end: '13:40',
-      name: 'Sport',
-      subject: 4,
-      room: 'A4',
-      slot: 5
-    },
-    10: {
-      id: 10,
-      break: true,
-      duration: 'SHORT',
-    },
-    11: {
-      id: 11,
-      break: false,
-      start: '13:50',
-      end: '14:35',
-      name: 'Sport',
-      subject: 4,
-      room: 'A4',
-      slot: 6
-    }
-  };
+export class OverviewPage {
+  subjects = {};
+  events = {};
+  day = '';
   homework = {
     1: {
       id: 1,
@@ -155,10 +32,35 @@ export class OverviewPage implements AfterViewInit {
       done: false
     }
   };
+  eventDays = {monday: 'Montag', tuesday: 'Dienstag', wednesday: 'Mittwoch', thursday: 'Donnerstag', friday: 'Freitag'};
 
-  constructor() { }
-
-  ngAfterViewInit() {
+  constructor(
+    private dataService: DataService
+  ) {
+    this.day = Object.keys(this.eventDays)[new Date().getUTCDay()-1];
+    this.dataService.isReady.subscribe((r) => {
+      if (!r) {
+        return;
+      }
+      // get subjects
+      this.dataService.getSubjects().subscribe(subjects => {
+        this.subjects = {};
+        for (const key in subjects) {
+          if (subjects.hasOwnProperty(key)) {
+            this.subjects[subjects[key].id] = subjects[key];
+          }
+        }
+      });
+      dataService.getEvents().subscribe(events => {
+        this.events = {};
+        for (const key in events) {
+          if (events.hasOwnProperty(key)) {
+            if (events[key].day === this.day) {
+              this.events[events[key].id] = events[key];
+            }
+          }
+        }
+      });
+    });
   }
-
 }
