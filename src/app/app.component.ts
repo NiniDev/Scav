@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import {AvatarService} from './services/avatar.service';
 import {Platform} from '@ionic/angular';
+import {AuthService} from "./services/auth.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -13,6 +15,8 @@ export class AppComponent {
   constructor(
     private avatarService: AvatarService,
     private platform: Platform,
+    private authService: AuthService,
+    private router: Router,
   ) {
     platform.ready().then(() => {
       setTimeout(() => {
@@ -21,6 +25,12 @@ export class AppComponent {
           console.log(this.user);
         });
       }, 2000);
+    });
+  }
+
+  logOut() {
+    this.authService.logout().then(() => {
+      this.router.navigate(['/login'], {replaceUrl: true});
     });
   }
 }
