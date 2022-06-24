@@ -17,8 +17,8 @@ export class TimetableDayBodyComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     this.eventKeys = Object.keys(this.events);
+    this.eventKeys.sort((a, b) => this.events[a].slot - this.events[b].slot);
   }
-
   getHomework(untilSlot: number) {
     const homework = [];
     // eslint-disable-next-line guard-for-in
