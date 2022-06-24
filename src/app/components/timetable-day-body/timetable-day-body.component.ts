@@ -1,20 +1,21 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
 
 @Component({
   selector: 'app-timetable-day-body',
   templateUrl: './timetable-day-body.component.html',
   styleUrls: ['./timetable-day-body.component.scss'],
 })
-export class TimetableDayBodyComponent implements OnInit {
+export class TimetableDayBodyComponent implements OnChanges {
   @Input() subjects;
   @Input() events;
   @Input() homework;
   eventKeys;
 
 
-  constructor() { }
+  constructor() {
+  }
 
-  ngOnInit() {
+  ngOnChanges(changes: SimpleChanges): void {
     this.eventKeys = Object.keys(this.events);
   }
 
