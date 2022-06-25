@@ -152,7 +152,7 @@ export class SchedulePage implements OnInit {
         subjects: this.subjects,
         subjectKeys: this.subjectKeys,
       },
-      breakpoints: [0, 0.6],
+      breakpoints: [0, 0.6, 1, 0.3],
       initialBreakpoint: 0.6,
       cssClass: 'modal-round',
     }).then(modal => {
@@ -199,7 +199,7 @@ export class SchedulePage implements OnInit {
         subjectKeys: this.subjectKeys,
         previousEnd: this.events[day]?.[this.eventKeys[day]?.[this.eventKeys[day]?.length - 1]]?.end,
       },
-      breakpoints: [0, 0.6],
+      breakpoints: [0, 0.6, 1, 0.3],
       initialBreakpoint: 0.6,
       cssClass: 'modal-round',
     }).then(modal => {
