@@ -49,4 +49,22 @@ export class AvatarService {
     const userDocRef = doc(this.firestore, `users/${user.uid}`);
     return setDoc(userDocRef, {displayName: name}, {merge: true});
   }
+
+  setSharedEvents(events) {
+    const user = this.auth.currentUser;
+    const userDocRef = doc(this.firestore, `users/${user.uid}`);
+    return setDoc(userDocRef, {sharedEvents: events}, {merge: true});
+  }
+
+  setSharedSubjects(subjects) {
+    const user = this.auth.currentUser;
+    const userDocRef = doc(this.firestore, `users/${user.uid}`);
+    return setDoc(userDocRef, {sharedSubjects: subjects}, {merge: true});
+  }
+
+  setSharedTimetableCode(code) {
+    const user = this.auth.currentUser;
+    const userDocRef = doc(this.firestore, `users/${user.uid}`);
+    return setDoc(userDocRef, {sharedTimetableCode: code}, {merge: true});
+  }
 }
