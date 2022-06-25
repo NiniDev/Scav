@@ -197,6 +197,7 @@ export class SchedulePage implements OnInit {
       componentProps: {
         subjects: this.subjects,
         subjectKeys: this.subjectKeys,
+        previousEnd: this.events[day]?.[this.eventKeys[day]?.[this.eventKeys[day]?.length - 1]]?.end,
       },
       breakpoints: [0, 0.6],
       initialBreakpoint: 0.6,

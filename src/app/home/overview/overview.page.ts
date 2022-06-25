@@ -37,7 +37,8 @@ export class OverviewPage {
   constructor(
     private dataService: DataService
   ) {
-    this.day = Object.keys(this.eventDays)[new Date().getUTCDay()-1];
+    // this.day = Object.keys(this.eventDays)[new Date().getUTCDay()-1];
+    this.day = 'friday';
     this.dataService.isReady.subscribe((r) => {
       if (!r) {
         return;

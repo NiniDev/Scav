@@ -9,9 +9,10 @@ import {AlertController, ModalController} from "@ionic/angular";
 export class ModalAddTimeslotPage implements OnInit {
   @Input() subjects: any;
   @Input() subjectKeys: any;
+  @Input() previousEnd: any;
 
-  start = '08:00';
-  end = '08:45';
+  start = '';
+  end = '';
   subject;
   type = 'subject';
   breakDuration = 'short';
@@ -23,6 +24,13 @@ export class ModalAddTimeslotPage implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.start = this.previousEnd ? this.previousEnd : '08:00';
+    // add 45 minutes to end
+    const end = new Date();
+    end.setMinutes(Number(this.start.substring(3, 5)));
+    end.setHours(Number(this.start.substring(0, 2)));
+    end.setMinutes(end.getMinutes() + 45);
+    this.end = end.getHours().toString().padStart(2, '0') + ':' + end.getMinutes().toString().padStart(2, '0');
   }
 
   addSubject() {
