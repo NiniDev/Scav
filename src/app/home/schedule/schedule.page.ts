@@ -3,6 +3,8 @@ import {AlertController, ModalController, ToastController} from '@ionic/angular'
 import {ModalAddSubjectPage} from './modal-add-subject/modal-add-subject.page';
 import {ModalAddTimeslotPage} from './modal-add-timeslot/modal-add-timeslot.page';
 import {DataService} from "../../services/data.service";
+import {SharingService} from "../../services/sharing.service";
+import {ModalShareTimetablePage} from "./modal-share-timetable/modal-share-timetable.page";
 
 const distance = require('jaro-winkler');
 
@@ -12,7 +14,7 @@ const distance = require('jaro-winkler');
   styleUrls: ['./schedule.page.scss'],
 })
 export class SchedulePage implements OnInit {
-  segment = 'subjects';
+  segment = 'timetable';
 
   subjects = {};
   subjectKeys = Object.keys(this.subjects);
@@ -36,6 +38,7 @@ export class SchedulePage implements OnInit {
     private toastController: ToastController,
     private modalController: ModalController,
     private dataService: DataService,
+    private sharingService: SharingService,
   ) {
     this.sortEvents();
     this.dataService.isReady.subscribe((r) => {
@@ -312,5 +315,39 @@ export class SchedulePage implements OnInit {
 
   subjectDown() {
     this.subjectHold = new Date();
+  }
+
+  async shareTimetable() {
+    const alert = await this.alertController.create({
+      header: 'Stundenplan teilen',
+      message: 'Wenn du deinen Stundenplan teilst, können andere Nutzer deinen Stundenplan inklusive Fächer etc. importieren.',
+      buttons: [
+        {
+          text: 'Abbrechen',
+          role: 'cancel',
+        },
+        {
+          text: 'Teilen',
+          handler: () => {
+            this.shareTimetableInternal();
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
+  private shareTimetableInternal() {
+    const m = this.modalController.create({
+      component: ModalShareTimetablePage,
+      componentProps: {
+        code: this.sharingService.getTimetableSharingCode(),
+      },
+      cssClass: 'modal-round',
+      initialBreakpoint: 0.6,
+      breakpoints: [0, 0.6, 1, 0.3],
+    }).then(
+      modal => modal.present()
+    );
   }
 }

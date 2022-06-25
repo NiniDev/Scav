@@ -1,6 +1,6 @@
 <ion-content>
   <ion-segment (ionChange)="segmentChanged($event)" color="tertiary"
-               style="--background: var(--ion-color-medium)" value="subjects" mode="md" slot="fixed">
+               style="--background: var(--ion-color-medium)" value="timetable" mode="md" slot="fixed">
     <ion-segment-button value="timetable" style="color: var(--ion-light-text)">
       <ion-label>Stundenplan</ion-label>
     </ion-segment-button>
@@ -59,6 +59,11 @@
     <ion-fab style="right: 1rem; bottom: 3.5rem; position: fixed">
       <ion-fab-button (click)="showTime = !showTime">
         <ion-icon name="toggle" style="transform: {{showTime ? 'rotate(0)' : 'rotate(180deg)'}}"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+    <ion-fab style="left: 1rem; bottom: 3.5rem; position: fixed">
+      <ion-fab-button (click)="shareTimetable()" color="tertiary">
+        <ion-icon name="share-social"></ion-icon>
       </ion-fab-button>
     </ion-fab>
   </div>
