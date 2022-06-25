@@ -70,7 +70,7 @@ export class RegisterPage implements OnInit {
     await loading.dismiss();
 
     if (user) {
-      await this.router.navigateByUrl('/home', {replaceUrl: true});
+      await this.router.navigateByUrl('/more-info', {replaceUrl: true});
     } else {
       const alert = await this.alertController.create({
         header: 'Registrierung fehlgeschlagen',
