@@ -5,7 +5,7 @@ import {
   collectionData, deleteDoc,
   doc,
   Firestore,
-  query,
+  query, updateDoc,
   where
 } from '@angular/fire/firestore';
 import {Auth} from '@angular/fire/auth';
@@ -57,5 +57,10 @@ export class DataService {
     event.user = this.user.uid;
     const eventRef = collection(this.firestore, `events`);
     return addDoc(eventRef, event);
+  }
+
+  updateEvent(event: any) {
+    const eventRef = doc(this.firestore, `events/${event.id}`);
+    return updateDoc(eventRef, event);
   }
 }

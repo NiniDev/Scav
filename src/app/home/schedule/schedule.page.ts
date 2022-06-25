@@ -181,6 +181,7 @@ export class SchedulePage implements OnInit {
       const item = items[i];
       const id = item.getAttribute('id');
       this.events[day][id].slot = i;
+      this.dataService.updateEvent(this.events[day][id]);
     }
     this.eventKeys[day].sort((a, b) => this.events[day][a].slot - this.events[day][b].slot);
     // sort events by slot
