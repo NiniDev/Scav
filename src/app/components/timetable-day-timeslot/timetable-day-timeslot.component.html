@@ -1,29 +1,29 @@
-<ion-row class="timetable-day-timeslot"
-         [class.shortbreak]="event.duration === 'SHORT'"
-         [class.longbreak]="event.duration === 'LONG'"
-         style="--bg: {{subjects[event?.subject]?.color}}{{opacity}}">
-  <ion-col size="auto" class="timetable-day-timeslot-startend" *ngIf="!event.break" id="trigger-{{event.id}}">
-    {{event.start}} - <br>
-    {{event.end}}
-  </ion-col>
-  <ion-col class="timetable-day-timeslot-info" *ngIf="!event.break">
-    <ion-label class="timetable-day-timeslot-label">
-      {{subjects[event.subject].name}} <span>({{event.room}})</span>
-    </ion-label>
-    <div class="indicator-point" color="tertiary" icon *ngIf="homework.length > 0">
-      <ion-icon name="alert" *ngIf="hasUnfinishedHomework()"></ion-icon>
-    </div>
-    <!--<div class="indicator-point" color="secondary" important *ngIf="timeslot.classtest.length > 0">
-    </div>-->
-  </ion-col>
-</ion-row>
+<ion-item lines="none"
+  style="--background: {{subjects[event?.subject]?.color}}; color: {{contrastColor(subjects[event?.subject]?.color)}}"  *ngIf="!event.break">
+  <ion-note slot="start"
+            style="color: {{contrastColor(subjects[event?.subject]?.color)}}; font-size: 1rem; margin: auto; padding:0; margin-right: 1rem" id="trigger-{{event.id}}">
+    {{event.start}}
+  </ion-note>
+  <ion-label style="font-size: 1.2rem; margin: auto; font-weight: 500">
+    {{subjects[event.subject].name}} <span>({{event.room}})</span>
+  </ion-label>
+  <ion-note slot="end"
+            style="color: {{contrastColor(subjects[event?.subject]?.color)}}; font-size: 1rem; margin: auto; padding:0; margin-left: 1rem">
+    <ion-badge mode="ios" *ngIf="!homework.length" color="success">HA</ion-badge>
+  </ion-note>
+</ion-item>
+<ion-item *ngIf="event.break" color="light">
+  <ion-label style="font-size: 1rem; margin: auto; font-weight: 500">
+    Pause
+  </ion-label>
+</ion-item>
 <ion-popover trigger="trigger-{{event.id}}" arrow="true" *ngIf="editable">
   <ng-template style="background: #3AD2A1">
-    <ion-item style="--background: var(--ion-color-light)">
+    <ion-item style="--background: white">
       <ion-label>Start</ion-label>
       <ion-input type="time" [value]="event.start"></ion-input>
     </ion-item>
-    <ion-item style="--background: var(--ion-color-light)">
+    <ion-item style="--background: white">
       <ion-label>Ende</ion-label>
       <ion-input type="time" [value]="event.end"></ion-input>
     </ion-item>
