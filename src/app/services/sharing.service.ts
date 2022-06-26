@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import {DataService} from './data.service';
 import {
+  collection, collectionData,
   doc,
-  Firestore,
-  setDoc,
+  Firestore, query,
+  setDoc, where,
 } from '@angular/fire/firestore';
 import {AvatarService} from './avatar.service';
 
@@ -74,5 +75,30 @@ export class SharingService {
     // Format: 1234-1234
     const code = Math.floor(Math.random() * 10000) + '-' + Math.floor(Math.random() * 10000);
     return code;
+  }
+
+  loadTimetable(code) {
+    const timetableRef = collection(this.firestore, `shared`);
+    const que = query(timetableRef, where('code', '==', code));
+    const colData = collectionData(que, { idField: 'id' }).subscribe(data => {
+      colData.unsubscribe();
+      if (data.length > 0) {
+        const timetable = data[0];
+        this.importSubjects(timetable.subjects);
+        this.importEvents(timetable.events);
+      }
+    });
+  }
+
+  private importSubjects(subjects: any) {
+    for (const subject of subjects) {
+      this.dataService.copySubject(subject, this.dataService.user.uid);
+    }
+  }
+
+  private importEvents(events: any) {
+    for (const event of events) {
+      this.dataService.copyEvent(event, this.dataService.user.uid);
+    }
   }
 }
