@@ -363,4 +363,8 @@ export class SchedulePage implements OnInit {
       );
     });
   }
+
+  loadTimetable() {
+    this.sharingService.loadTimetable('768-2245')
+  }
 }
