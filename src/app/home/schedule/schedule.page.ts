@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {AlertController, ModalController, ToastController} from '@ionic/angular';
+import {AlertController, LoadingController, ModalController, ToastController} from '@ionic/angular';
 import {ModalAddSubjectPage} from './modal-add-subject/modal-add-subject.page';
 import {ModalAddTimeslotPage} from './modal-add-timeslot/modal-add-timeslot.page';
-import {DataService} from "../../services/data.service";
-import {SharingService} from "../../services/sharing.service";
-import {ModalShareTimetablePage} from "./modal-share-timetable/modal-share-timetable.page";
+import {DataService} from '../../services/data.service';
+import {SharingService} from '../../services/sharing.service';
+import {ModalShareTimetablePage} from './modal-share-timetable/modal-share-timetable.page';
 
 const distance = require('jaro-winkler');
 
@@ -29,7 +29,7 @@ export class SchedulePage implements OnInit {
 
   maxSlot = 0;
   maxSlotKeys = [];
-  showTime: boolean = false;
+  showTime = false;
 
   subjectHold;
 
@@ -39,6 +39,7 @@ export class SchedulePage implements OnInit {
     private modalController: ModalController,
     private dataService: DataService,
     private sharingService: SharingService,
+    private loadingController: LoadingController
   ) {
     this.sortEvents();
     this.dataService.isReady.subscribe((r) => {
@@ -337,17 +338,24 @@ export class SchedulePage implements OnInit {
     await alert.present();
   }
 
-  private shareTimetableInternal() {
-    const m = this.modalController.create({
-      component: ModalShareTimetablePage,
-      componentProps: {
-        code: this.sharingService.getTimetableSharingCode(),
-      },
-      cssClass: 'modal-round',
-      initialBreakpoint: 0.6,
-      breakpoints: [0, 0.6, 1, 0.3],
-    }).then(
-      modal => modal.present()
-    );
+  async shareTimetableInternal() {
+    const loading = await this.loadingController.create({
+      message: 'Stundenplan wird geteilt...',
+    });
+    await loading.present();
+    this.sharingService.getTimetableSharingCode().then(code => {
+      loading.dismiss();
+      const m = this.modalController.create({
+        component: ModalShareTimetablePage,
+        componentProps: {
+          code,
+        },
+        cssClass: 'modal-round',
+        initialBreakpoint: 0.6,
+        breakpoints: [0, 0.6],
+      }).then(
+        modal => modal.present()
+      );
+    });
   }
 }

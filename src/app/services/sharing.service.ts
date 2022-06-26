@@ -32,15 +32,18 @@ export class SharingService {
           if (profile.sharedTimetableCode) {
             this.code = profile.sharedTimetableCode;
           } else {
-            this.code = this.generateCode();
+            this.code = ''
           }
         });
       }
     });
   }
 
-  getTimetableSharingCode() {
-    return this.code;
+  async getTimetableSharingCode() {
+    if (this.code) {
+      return this.code;
+    }
+    return this.shareTimetable();
   }
 
   async shareTimetable() {
