@@ -224,7 +224,12 @@ export class SchedulePage implements OnInit {
             timeslot['subject'] = result.data.subject;
             timeslot['room'] = result.data.room;
           }
-          const prevSlot = this.events[day][this.eventKeys[day][this.eventKeys[day].length - 1]].slot
+          let prevSlot;
+          try {
+            prevSlot = this.events[day][this.eventKeys[day][this.eventKeys[day]?.length - 1]].slot;
+          } catch (e) {
+            prevSlot = 0;
+          }
           timeslot['slot'] = prevSlot + 1;
           timeslot['day'] = day;
           this.dataService.addEvent(timeslot).then(() => {
