@@ -59,6 +59,11 @@ export class DataService {
     return addDoc(eventRef, event);
   }
 
+  async setShared(collectionName: string, id) {
+    const ref = doc(this.firestore, `${collectionName}/${id}`);
+    await updateDoc(ref, {shared: true});
+  }
+
   updateEvent(event: any) {
     const eventRef = doc(this.firestore, `events/${event.id}`);
     return updateDoc(eventRef, event);

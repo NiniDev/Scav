@@ -58,8 +58,12 @@ export class SharingService {
     const timetableRef = doc(this.firestore, `shared/${this.dataService.user.uid}`);
     await setDoc(timetableRef, document, {merge: true});
     await this.avatarService.setSharedTimetableCode(code);
-    await this.avatarService.setSharedEvents(events);
-    await this.avatarService.setSharedSubjects(subjects);
+    for (const event of this.events) {
+      await this.dataService.setShared('events', event.id);
+    }
+    for (const subject of this.subjects) {
+      await this.dataService.setShared('subjects', subject.id);
+    }
     return code;
   }
 
