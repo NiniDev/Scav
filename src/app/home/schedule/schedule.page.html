@@ -61,19 +61,6 @@
         <ion-icon name="toggle" style="transform: {{showTime ? 'rotate(0)' : 'rotate(180deg)'}}"></ion-icon>
       </ion-fab-button>
     </ion-fab>
-    <ion-fab style="left: 1rem; bottom: 3.5rem; position: fixed" color="tertiary">
-      <ion-fab-button>
-        <ion-icon name="ellipsis-vertical"></ion-icon>
-      </ion-fab-button>
-      <ion-fab-list side="top">
-        <ion-fab-button (click)="shareTimetable()" color="tertiary">
-          <ion-icon name="share-social"></ion-icon>
-        </ion-fab-button>
-        <ion-fab-button (click)="loadTimetable()" color="tertiary">
-          <ion-icon name="download"></ion-icon>
-        </ion-fab-button>
-      </ion-fab-list>
-    </ion-fab>
   </div>
   <div *ngIf="segment === 'days'"
        style="color: var(--ion-light-text); padding-inline: 1rem; margin-bottom: 3.5rem; margin-top: 3.5rem">

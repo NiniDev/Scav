@@ -15,7 +15,6 @@ import {getAuth, provideAuth} from '@angular/fire/auth';
 import {getFirestore, provideFirestore} from '@angular/fire/firestore';
 import {getStorage, provideStorage} from '@angular/fire/storage';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {SocialSharing} from '@ionic-native/social-sharing/ngx';
 registerLocaleData(myLocaleDe);
 @NgModule({
   declarations: [AppComponent],
@@ -30,7 +29,7 @@ registerLocaleData(myLocaleDe);
     provideStorage(() => getStorage()),
     BrowserAnimationsModule,
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, DatePipe, SocialSharing],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, DatePipe],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

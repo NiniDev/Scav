@@ -15,9 +15,6 @@ const routes: Routes = [
   {
     path: 'modal-add-timeslot',
     loadChildren: () => import('./modal-add-timeslot/modal-add-timeslot.module').then( m => m.ModalAddTimeslotPageModule)
-  },  {
-    path: 'modal-share-timetable',
-    loadChildren: () => import('./modal-share-timetable/modal-share-timetable.module').then( m => m.ModalShareTimetablePageModule)
   }
 
 ];

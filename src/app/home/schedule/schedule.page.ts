@@ -3,8 +3,6 @@ import {AlertController, LoadingController, ModalController, ToastController} fr
 import {ModalAddSubjectPage} from './modal-add-subject/modal-add-subject.page';
 import {ModalAddTimeslotPage} from './modal-add-timeslot/modal-add-timeslot.page';
 import {DataService} from '../../services/data.service';
-import {SharingService} from '../../services/sharing.service';
-import {ModalShareTimetablePage} from './modal-share-timetable/modal-share-timetable.page';
 
 const distance = require('jaro-winkler');
 
@@ -38,7 +36,6 @@ export class SchedulePage implements OnInit {
     private toastController: ToastController,
     private modalController: ModalController,
     private dataService: DataService,
-    private sharingService: SharingService,
     private loadingController: LoadingController
   ) {
     this.sortEvents();
@@ -321,50 +318,5 @@ export class SchedulePage implements OnInit {
 
   subjectDown() {
     this.subjectHold = new Date();
-  }
-
-  async shareTimetable() {
-    const alert = await this.alertController.create({
-      header: 'Stundenplan teilen',
-      message: 'Wenn du deinen Stundenplan teilst, können andere Nutzer deinen Stundenplan inklusive Fächer etc. importieren.',
-      buttons: [
-        {
-          text: 'Abbrechen',
-          role: 'cancel',
-        },
-        {
-          text: 'Teilen',
-          handler: () => {
-            this.shareTimetableInternal();
-          }
-        }
-      ]
-    });
-    await alert.present();
-  }
-
-  async shareTimetableInternal() {
-    const loading = await this.loadingController.create({
-      message: 'Stundenplan wird geteilt...',
-    });
-    await loading.present();
-    this.sharingService.getTimetableSharingCode().then(code => {
-      loading.dismiss();
-      const m = this.modalController.create({
-        component: ModalShareTimetablePage,
-        componentProps: {
-          code,
-        },
-        cssClass: 'modal-round',
-        initialBreakpoint: 0.6,
-        breakpoints: [0, 0.6],
-      }).then(
-        modal => modal.present()
-      );
-    });
-  }
-
-  loadTimetable() {
-    this.sharingService.loadTimetable('768-2245')
   }
 }
