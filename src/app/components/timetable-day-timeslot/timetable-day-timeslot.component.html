@@ -9,7 +9,7 @@
   </ion-label>
   <ion-note slot="end"
             style="color: {{contrastColor(subjects[event?.subject]?.color)}}; font-size: 1rem; margin: auto; padding:0; margin-left: 1rem">
-    <ion-badge mode="ios" *ngIf="!homework.length" color="success">HA</ion-badge>
+    <ion-badge mode="ios" *ngIf="homework.length > 0" color="success">HA</ion-badge>
   </ion-note>
 </ion-item>
 <ion-item *ngIf="event.break" color="light">
