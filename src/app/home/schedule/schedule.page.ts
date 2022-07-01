@@ -194,12 +194,19 @@ export class SchedulePage implements OnInit {
   }
 
   async addTimeslot(day) {
+    let prevEnd;
+    for (let i = this.eventKeys[day]?.length - 1; i >= 0; i--) {
+      if (this.events[day]?.[this.eventKeys[day]?.[i]]?.end) {
+        prevEnd = this.events[day]?.[this.eventKeys[day]?.[i]]?.end;
+        break;
+      }
+    }
     await this.modalController.create({
       component: ModalAddTimeslotPage,
       componentProps: {
         subjects: this.subjects,
         subjectKeys: this.subjectKeys,
-        previousEnd: this.events[day]?.[this.eventKeys[day]?.[this.eventKeys[day]?.length - 1]]?.end,
+        previousEnd: prevEnd,
       },
       breakpoints: [0, 0.6, 1, 0.3],
       initialBreakpoint: 0.6,
