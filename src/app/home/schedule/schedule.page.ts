@@ -75,6 +75,31 @@ export class SchedulePage implements OnInit {
     });
   }
 
+  getCommonStartTime(slot) {
+    const startTime = [];
+    for (const day in this.events) {
+      for (const key in this.events[day]) {
+        if (this.events[day][key].slot === slot) {
+          startTime.push(this.events[day][key].start);
+        }
+      }
+    }
+    // get most frequent start time
+    const counts = {};
+    startTime.forEach(time => {
+        if (!counts[time]) {
+          counts[time] = 0;
+        }
+        counts[time]++;
+      }
+    );
+    if (Object.keys(counts).length === 0) {
+      return '';
+    }
+    const max = Object.keys(counts).reduce((a, b) => counts[a] > counts[b] ? a : b);
+    return max ? max : '';
+  }
+
   sortEvents() {
     for (const key in this.events) {
       this.eventKeys[key] = Object.keys(this.events[key]);
@@ -195,10 +220,20 @@ export class SchedulePage implements OnInit {
 
   async addTimeslot(day) {
     let prevEnd;
-    for (let i = this.eventKeys[day]?.length - 1; i >= 0; i--) {
-      if (this.events[day]?.[this.eventKeys[day]?.[i]]?.end) {
-        prevEnd = this.events[day]?.[this.eventKeys[day]?.[i]]?.end;
-        break;
+    let prevSlot;
+    try {
+      prevSlot = this.events[day][this.eventKeys[day][this.eventKeys[day]?.length - 1]].slot;
+    } catch (e) {
+      prevSlot = -1;
+    }
+    if (this.getCommonStartTime(prevSlot + 1) !== '') {
+      prevEnd = this.getCommonStartTime(prevSlot + 1);
+    } else {
+      for (let i = this.eventKeys[day]?.length - 1; i >= 0; i--) {
+        if (this.events[day]?.[this.eventKeys[day]?.[i]]?.end) {
+          prevEnd = this.events[day]?.[this.eventKeys[day]?.[i]]?.end;
+          break;
+        }
       }
     }
     await this.modalController.create({
@@ -227,12 +262,6 @@ export class SchedulePage implements OnInit {
             timeslot['name'] = this.subjects[result.data.subject].name;
             timeslot['subject'] = result.data.subject;
             timeslot['room'] = result.data.room;
-          }
-          let prevSlot;
-          try {
-            prevSlot = this.events[day][this.eventKeys[day][this.eventKeys[day]?.length - 1]].slot;
-          } catch (e) {
-            prevSlot = 0;
           }
           timeslot['slot'] = prevSlot + 1;
           timeslot['day'] = day;

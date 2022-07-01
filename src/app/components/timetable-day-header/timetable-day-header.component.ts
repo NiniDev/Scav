@@ -16,9 +16,7 @@ export class TimetableDayHeaderComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (Object.keys(this.events)) {
       const eventKeys = Object.keys(this.events);
-      console.log(eventKeys);
       eventKeys.sort((a, b) => this.events[a].slot - this.events[b].slot);
-      console.log(eventKeys);
       this.start = this.events[eventKeys[0]]?.start;
       let end;
       for (let i = eventKeys?.length - 1; i >= 0; i--) {
