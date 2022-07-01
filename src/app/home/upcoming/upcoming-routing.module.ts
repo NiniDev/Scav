@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: UpcomingPage
+  },
+  {
+    path: 'modal-add-homework',
+    loadChildren: () => import('./modal-add-homework/modal-add-homework.module').then( m => m.ModalAddHomeworkPageModule)
   }
 ];
 

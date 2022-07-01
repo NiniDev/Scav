@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {DataService} from '../../services/data.service';
+import {ModalController} from '@ionic/angular';
+import {ModalAddHomeworkPage} from "./modal-add-homework/modal-add-homework.page";
 @Component({
   selector: 'app-upcoming',
   templateUrl: './upcoming.page.html',
@@ -12,7 +14,8 @@ export class UpcomingPage implements OnInit {
   homeworkKeys = Object.keys(this.homework);
 
   constructor(
-    private dataService: DataService
+    private dataService: DataService,
+    private modalController: ModalController,
   ) {
     this.dataService.isReady.subscribe((r) => {
       if (!r) {
@@ -37,8 +40,9 @@ export class UpcomingPage implements OnInit {
             this.homework[events[key].id] = events[key];
           }
         }
+        this.homework = this.getOrderedHomework();
+        console.log(this.homework);
         this.homeworkKeys = Object.keys(this.homework);
-        this.sortHomework();
       });
     });
   }
@@ -55,8 +59,8 @@ export class UpcomingPage implements OnInit {
       homework.push(h);
     }
     return homework.sort((a, b) => {
-      const aDate = new Date(a.untilDate);
-      const bDate = new Date(b.untilDate);
+      const aDate = new Date(a.until);
+      const bDate = new Date(b.until);
       return aDate.getTime() - bDate.getTime();
     });
   }
@@ -76,11 +80,30 @@ export class UpcomingPage implements OnInit {
   getDiffDays(date: string) {
     const today = new Date();
     const until = new Date(date);
-    return Math.abs(Math.floor((until.getTime() - today.getTime()) / (1000 * 60 * 60 * 24)));
+    return Math.abs(Math.floor((until.getTime() - today.getTime()) / (1000 * 60 * 60 * 24))) + 1;
   }
 
-
-  private sortHomework() {
-    this.homeworkKeys.sort((a, b) => this.homework[a].until - this.homework[b].until);
+  addHomework() {
+    this.modalController.create({
+      component: ModalAddHomeworkPage,
+      componentProps: {
+        subjects: this.subjects,
+        subjectKeys: this.subjectKeys,
+      },
+      breakpoints: [0, 0.6, 1, 0.3],
+      initialBreakpoint: 0.6,
+      cssClass: 'modal-round',
+    }).then(modal => {
+      modal.present();
+      modal.onDidDismiss().then(result => {
+        if (result.data && result.role === 'add') {
+          result.data.since = new Date().getDate();
+          result.data.done = false;
+          this.dataService.addHomework(result.data).then(() => {
+            console.log('added');
+          });
+        }
+      });
+    });
   }
 }
