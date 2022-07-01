@@ -326,9 +326,7 @@ export class SchedulePage implements OnInit {
       for (const event in this.events[day]) {
         if (this.events[day][event].subject == subjectID) {
           usageCount++;
-          delete this.events[day][event];
-          console.log("event");
-          this.eventKeys[day] = this.eventKeys[day].filter(key => key !== event);
+          this.dataService.deleteEvent(event);
         }
       }
     }
