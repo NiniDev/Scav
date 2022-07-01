@@ -106,4 +106,14 @@ export class UpcomingPage implements OnInit {
       });
     });
   }
+
+  extraClasses(diffDays: number) {
+    if (diffDays <= 1) {
+      return 'gradient-danger';
+    }
+    if (diffDays <= 3) {
+      return 'gradient-warning';
+    }
+    return '';
+  }
 }

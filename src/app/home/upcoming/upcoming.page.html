@@ -1,14 +1,14 @@
 <app-layer-card top="0">
   <app-layer-card-header header_height="3.5rem" fade="fade">Anstehende Aufgaben</app-layer-card-header>
   <app-layer-card-body fade_header="fade" fade_header_height="3.5rem">
-    <app-info-card *ngFor="let hw of getOrderedHomework()" padding="1rem">
+    <app-info-card *ngFor="let hw of getOrderedHomework()" padding="1rem" [extraClasses]="extraClasses(getDiffDays(hw.until))">
       <ion-label>
         {{hw.title}}
         <ion-badge style="background: {{subjects[hw.subject].color}}" mode="ios">
           {{subjects[hw.subject].abbr}}
         </ion-badge>
         <ion-badge mode="ios" color="light">
-          {{getDiffDays(hw.until)}} Tage
+          {{getDiffDays(hw.until)}} {{getDiffDays(hw.until) === 1 ? 'Tag' : 'Tage'}}
         </ion-badge>
         <ion-badge color="primary" mode="ios">HA</ion-badge>
       </ion-label>
@@ -19,7 +19,7 @@
   </app-layer-card-body>
 </app-layer-card>
 <ion-fab style="right: 1rem; bottom: 3.5rem; position: fixed">
-  <ion-fab-button>
+  <ion-fab-button (click)="addHomework()">
     <ion-icon name="add"></ion-icon>
   </ion-fab-button>
 </ion-fab>
