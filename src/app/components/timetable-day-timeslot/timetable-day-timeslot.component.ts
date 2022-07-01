@@ -34,10 +34,14 @@ export class TimetableDayTimeslotComponent implements OnInit {
 
   contrastColor(color: string) {
     // TODO: utility function to get contrast color
-    const r = parseInt(color.substring(1, 3), 16);
-    const g = parseInt(color.substring(3, 5), 16);
-    const b = parseInt(color.substring(5, 7), 16);
-    const useBlack = (r * 0.299 + g * 0.587 + b * 0.114) > 186;
-    return useBlack ? '#000000' : '#ffffff';
+    try {
+      const r = parseInt(color.substring(1, 3), 16);
+      const g = parseInt(color.substring(3, 5), 16);
+      const b = parseInt(color.substring(5, 7), 16);
+      const useBlack = (r * 0.299 + g * 0.587 + b * 0.114) > 186;
+      return useBlack ? '#000000' : '#ffffff';
+    } catch (e) {
+      return '#ffffff';
+    }
   }
 }
