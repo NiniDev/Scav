@@ -310,10 +310,13 @@ export class SchedulePage implements OnInit {
   }
 
   deleteEvent(day, event) {
-    delete this.events[day][event];
-    this.eventKeys[day] = this.eventKeys[day].filter(key => key !== event);
-    this.filteredSubjectKeys = this.filteredSubjectKeys.filter(key => key !== event);
-    this.sortEvents();
+    this.dataService.deleteEvent(event).then(() => {
+      this.toastController.create({
+        message: 'Event gelöscht',
+        duration: 3000,
+        position: 'bottom',
+      }).then(toast => toast.present());
+    });
   }
 
   subjectDown() {

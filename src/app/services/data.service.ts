@@ -64,47 +64,8 @@ export class DataService {
     return updateDoc(eventRef, event);
   }
 
-  getSubject(subjectID: string) {
-    const subjectRef = doc(this.firestore, `subjects/${subjectID}`);
-    return docData(subjectRef);
-  }
-
-  copySubject(subject: any, toUser) {
-    const sub = this.getSubject(subject).subscribe(data => {
-      sub.unsubscribe();
-      data.user = toUser;
-      data.originalid = subject;
-      delete data.id;
-      this.addSubject(data);
-    });
-  }
-
-  copyEvent(event: any, toUser) {
-    const sub = this.getEvent(event).subscribe(data => {
-      sub.unsubscribe();
-      delete data.shared;
-      delete data.id;
-      data.user = toUser;
-      if (!data.break) {
-        const sub2 = this.getNewSubjectID(data.subject).subscribe(subject => {
-          sub2.unsubscribe();
-          data.subject = subject[0].id;
-          this.addEvent(data);
-        });
-      } else {
-        this.addEvent(data);
-      }
-    });
-  }
-
-  private getEvent(event: any) {
-    const eventRef = doc(this.firestore, `events/${event}`);
-    return docData(eventRef);
-  }
-
-  private getNewSubjectID(subject: any) {
-    const collectionRef = collection(this.firestore, `subjects`);
-    const que = query(collectionRef, where('originalid', '==', subject));
-    return collectionData(que, {idField: 'id'});
+  deleteEvent(id) {
+    const eventRef = doc(this.firestore, `events/${id}`);
+    return deleteDoc(eventRef);
   }
 }
