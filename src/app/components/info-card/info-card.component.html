@@ -1,4 +1,4 @@
-<div class="info-card" *ngIf="icon.length === 0"
+<div class="info-card {{extraClasses}}" *ngIf="icon.length === 0"
      [style]="padding.length === 0 ? '' : 'padding: ' + padding">
   <ng-container *ngTemplateOutlet="contentTpl"></ng-container>
 </div>

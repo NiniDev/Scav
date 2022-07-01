@@ -10,3 +10,18 @@
     padding-inline: 0.1rem;
   }
 }
+
+.gradient-danger {
+  background: var(--ion-color-danger);
+  background: linear-gradient(90deg, var(--ion-color-danger) 0%, rgba(255,255,255,1) 35%);
+}
+
+.gradient-success {
+  background: var(--ion-color-success);
+  background: linear-gradient(90deg, var(--ion-color-success) 0%, rgba(255,255,255,1) 35%);
+}
+
+.gradient-warning {
+  background: var(--ion-color-warning);
+  background: linear-gradient(90deg, var(--ion-color-warning) 0%, rgba(255,255,255,1) 35%);
+}

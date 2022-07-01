@@ -9,6 +9,7 @@ export class InfoCardComponent implements OnInit {
   @Input() icon = '';
   @Input() icon_bg = '#3AD2A1';
   @Input() padding = '';
+  @Input() extraClasses = '';
 
   constructor() { }
 
