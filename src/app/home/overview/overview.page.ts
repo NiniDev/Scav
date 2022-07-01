@@ -10,28 +10,7 @@ export class OverviewPage {
   subjects = {};
   events = {};
   day = '';
-  homework = {
-    1: {
-      id: 1,
-      subject: 1,
-      since: '2022-05-27',
-      untilDate: '2022-05-29',
-      untilSlot: 0,
-      title: 'ABC-Formel',
-      description: 'ABC-Formel -b +- sqrt(b^2-4ac) / 2a',
-      done: true
-    },
-    2: {
-      id: 2,
-      subject: 3,
-      since: '2022-05-27',
-      untilDate: '2022-05-29',
-      untilSlot: 4,
-      title: 'Harmonische schwingung',
-      description: 'Lies dir den text auf Seite 180 durch und...',
-      done: false
-    }
-  };
+  homework = {};
   eventDays = {monday: 'Montag', tuesday: 'Dienstag', wednesday: 'Mittwoch', thursday: 'Donnerstag', friday: 'Freitag'};
 
   constructor(

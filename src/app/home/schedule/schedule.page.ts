@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {AlertController, LoadingController, ModalController, ToastController} from '@ionic/angular';
+import {AlertController, ModalController, ToastController} from '@ionic/angular';
 import {ModalAddSubjectPage} from './modal-add-subject/modal-add-subject.page';
 import {ModalAddTimeslotPage} from './modal-add-timeslot/modal-add-timeslot.page';
 import {DataService} from '../../services/data.service';
@@ -36,7 +36,6 @@ export class SchedulePage implements OnInit {
     private toastController: ToastController,
     private modalController: ModalController,
     private dataService: DataService,
-    private loadingController: LoadingController
   ) {
     this.sortEvents();
     this.dataService.isReady.subscribe((r) => {
