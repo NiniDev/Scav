@@ -68,4 +68,16 @@ export class DataService {
     const eventRef = doc(this.firestore, `events/${id}`);
     return deleteDoc(eventRef);
   }
+
+  getHomework() {
+    const homeworkRef = collection(this.firestore, `homework`);
+    const que = query(homeworkRef, where('user', '==', this.user.uid));
+    return collectionData(que, {idField: 'id'});
+  }
+
+  addHomework(homework) {
+    homework.user = this.user.uid;
+    const homeworkRef = collection(this.firestore, `homework`);
+    return addDoc(homeworkRef, homework);
+  }
 }
