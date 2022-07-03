@@ -3,7 +3,7 @@
   <ion-list>
     <ion-item style="color: var(--ion-light-text)">
       <ion-label>Fach:</ion-label>
-      <ion-select placeholder="Fach auswählen" interface="popover" [(ngModel)]="subject">
+      <ion-select placeholder="Fach auswählen" interface="popover" [(ngModel)]="subject" (ionChange)="subjectChanged()">
         <ion-select-option *ngFor="let s of subjectKeys" [value]="s">
           {{subjects[s].name}} ({{subjects[s].teacher}})
         </ion-select-option>
@@ -17,10 +17,19 @@
       <ion-label>Beschreibung:</ion-label>
       <ion-textarea type="text" [(ngModel)]="description" auto-grow rows="1"></ion-textarea>
     </ion-item>
-    <ion-item style="color: var(--ion-light-text)">
-      <ion-label>Bis:</ion-label>
-      <ion-input type="date" [(ngModel)]="until"></ion-input>
-    </ion-item>
+    <ion-datetime [(ngModel)]="until"
+                  mode="ios"
+                  style="margin-top: .5rem"
+                  firstDayOfWeek="1"
+                  presentation="date"
+                  size="cover"
+                  min="2022-07-03"
+                  [isDateEnabled]="isDateEnabled"
+                  locale="de-DE"
+    >
+      <span slot="title" style="color: var(--ion-light-text)">Bis:</span>
+    </ion-datetime>
+
   </ion-list>
   <ion-button expand="block" (click)="addHomework()" color="success"
               [disabled]="!(until && description && title && subject)">Speichern
