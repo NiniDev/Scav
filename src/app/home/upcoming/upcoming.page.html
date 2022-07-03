@@ -1,5 +1,5 @@
-<app-layer-card top="0">
-  <app-layer-card-header header_height="3.5rem" fade="fade">Anstehende Aufgaben</app-layer-card-header>
+<app-layer-card top="0" color_style="dark">
+  <app-layer-card-header header_height="3.5rem" fade="fade" color_style="dark">Anstehende Aufgaben</app-layer-card-header>
   <app-layer-card-body fade_header="fade" fade_header_height="3.5rem">
     <app-info-card *ngFor="let hw of getOrderedHomework()" padding="1rem" [extraClasses]="extraClasses(getDiffDays(hw.until))">
       <ion-label>
