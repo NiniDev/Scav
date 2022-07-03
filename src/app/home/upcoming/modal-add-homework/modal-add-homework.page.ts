@@ -9,10 +9,20 @@ import {ModalController} from "@ionic/angular";
 export class ModalAddHomeworkPage implements OnInit {
   @Input() subjects: any;
   @Input() subjectKeys: any;
+  @Input() events;
+  eventKeys: any;
   title;
   description;
   until;
   subject;
+  allowedDays = [];
+  eventDays = {
+    monday: 'Montag',
+    tuesday: 'Dienstag',
+    wednesday: 'Mittwoch',
+    thursday: 'Donnerstag',
+    friday: 'Freitag'
+  };
 
   constructor(
     private modalController: ModalController,
@@ -32,5 +42,24 @@ export class ModalAddHomeworkPage implements OnInit {
 
   cancel() {
     this.modalController.dismiss({}, 'cancel');
+  }
+
+  isDateEnabled = (dateIsoString: any) => {
+    const day = new Date(dateIsoString).getUTCDay() - 1;
+    return this.allowedDays.includes(Object.keys(this.eventDays)[day]);
+  };
+
+  subjectChanged() {
+    // get days where there is an event
+    this.eventKeys = Object.keys(this.events);
+    const days = [];
+    for (const eventId of this.eventKeys) {
+      if (this.events[eventId].subject === this.subject) {
+        days.push(this.events[eventId].day);
+      }
+    }
+    this.allowedDays = days;
+    const dt = document.querySelector('ion-datetime');
+    dt.reset();
   }
 }
