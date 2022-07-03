@@ -12,6 +12,8 @@ export class UpcomingPage implements OnInit {
   subjectKeys = Object.keys(this.subjects);
   homework = {};
   homeworkKeys = Object.keys(this.homework);
+  events = {};
+  eventKeys = {};
 
   constructor(
     private dataService: DataService,
@@ -43,6 +45,16 @@ export class UpcomingPage implements OnInit {
         this.homework = this.getOrderedHomework();
         console.log(this.homework);
         this.homeworkKeys = Object.keys(this.homework);
+      });
+      // get events
+      dataService.getEvents().subscribe(events => {
+        this.events = {};
+        for (const key in events) {
+          if (events.hasOwnProperty(key)) {
+            this.events[events[key].id] = events[key];
+          }
+        }
+        this.eventKeys = Object.keys(this.events);
       });
     });
   }
@@ -89,9 +101,10 @@ export class UpcomingPage implements OnInit {
       componentProps: {
         subjects: this.subjects,
         subjectKeys: this.subjectKeys,
+        events: this.events,
       },
-      breakpoints: [0, 0.6, 1, 0.3],
-      initialBreakpoint: 0.6,
+      breakpoints: [0, 0.6, 1, 0.3, 0.8],
+      initialBreakpoint: 0.8,
       cssClass: 'modal-round',
     }).then(modal => {
       modal.present();
