@@ -133,4 +133,11 @@ export class UpcomingPage implements OnInit {
     }
     return '';
   }
+
+  changeStatus(id, $event: any) {
+    console.log(id, $event.detail.checked);
+    this.dataService.changeHomeworkStatus(id, $event.detail.checked).then(() => {
+      console.log('changed');
+    });
+  }
 }

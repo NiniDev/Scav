@@ -80,4 +80,9 @@ export class DataService {
     const homeworkRef = collection(this.firestore, `homework`);
     return addDoc(homeworkRef, homework);
   }
+
+  changeHomeworkStatus(id, checked) {
+    const homeworkRef = doc(this.firestore, `homework/${id}`);
+    return updateDoc(homeworkRef, {done: checked});
+  }
 }
