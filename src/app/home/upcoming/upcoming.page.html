@@ -8,7 +8,7 @@
           {{subjects[hw.subject].abbr}}
         </ion-badge>
         <ion-badge mode="ios" color="light">
-          {{getDiffDays(hw.until)}} {{getDiffDays(hw.until) === 1 ? 'Tag' : 'Tage'}}
+          {{getDiffDays(hw.until) > 0 ? getDiffDays(hw.until) : 'Überfällig'}} {{getDiffDays(hw.until) > 0 ? (getDiffDays(hw.until) === 1 ? 'Tag' : 'Tage') : ''}}
         </ion-badge>
         <ion-badge color="primary" mode="ios">HA</ion-badge>
       </ion-label>

@@ -25,3 +25,8 @@
   background: var(--ion-color-warning);
   background: linear-gradient(90deg, var(--ion-color-warning) 0%, rgba(255,255,255,1) 35%);
 }
+
+.full-danger {
+  background: var(--ion-color-danger);
+  color: white;
+}

@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {DataService} from '../../services/data.service';
 import {ModalController} from '@ionic/angular';
-import {ModalAddHomeworkPage} from "./modal-add-homework/modal-add-homework.page";
+import {ModalAddHomeworkPage} from './modal-add-homework/modal-add-homework.page';
+
 @Component({
   selector: 'app-upcoming',
   templateUrl: './upcoming.page.html',
@@ -92,7 +93,7 @@ export class UpcomingPage implements OnInit {
   getDiffDays(date: string) {
     const today = new Date();
     const until = new Date(date);
-    return Math.abs(Math.floor((until.getTime() - today.getTime()) / (1000 * 60 * 60 * 24))) + 1;
+    return (Math.floor((until.getTime() - today.getTime()) / (1000 * 60 * 60 * 24))) + 1;
   }
 
   addHomework() {
@@ -121,6 +122,9 @@ export class UpcomingPage implements OnInit {
   }
 
   extraClasses(diffDays: number) {
+    if (diffDays < 0) {
+      return 'full-danger';
+    }
     if (diffDays <= 1) {
       return 'gradient-danger';
     }
