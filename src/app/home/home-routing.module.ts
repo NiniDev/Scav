@@ -24,6 +24,10 @@ const routes: Routes = [
         loadChildren: () => import('./learn/learn.module').then( m => m.LearnPageModule)
       },
       {
+        path: 'homework',
+        loadChildren: () => import('./homework/homework.module').then( m => m.HomeworkPageModule)
+      },
+      {
         path: '**',
         redirectTo: '/home/overview',
         pathMatch: 'full'
