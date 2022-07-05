@@ -15,41 +15,18 @@
     <ion-chip style="--color: var(--ion-light-text);--background: var(--ion-color-light)">
       <ion-label>Filter</ion-label>
     </ion-chip>
-    <ion-chip style="--color: var(--ion-light-text);--background: var(--ion-color-light)" *ngFor="let filter of appliedFilters() | keys">
+    <ion-chip style="--color: var(--ion-light-text);--background: var(--ion-color-light)"
+              *ngFor="let filter of appliedFilters() | keys" [id]="'trigger-'+filters[filter].property">
       <ion-label>{{filters[filter].display}}: {{filters[filter].valueDisplay}}</ion-label>
       <ion-icon name="close" style="color: var(--ion-light-text);"></ion-icon>
     </ion-chip>
-    <ion-chip style="--color: var(--ion-light-text);--background: var(--ion-color-light)" id="click-trigger">
-      <ion-label>Sortieren: Fach</ion-label>
-      <ion-icon name="chevron-up" style="color: var(--ion-light-text);"></ion-icon>
-    </ion-chip>
-    <ion-popover trigger="click-trigger" triggerAction="click">
+    <ion-popover trigger="trigger-subject" triggerAction="click">
       <ng-template>
         <ion-list>
-          <ion-item>
-            <ion-label>Fach</ion-label>
-            <ion-icon name="chevron-up" style="color: var(--ion-light-text);"></ion-icon>
-            <ion-icon name="chevron-down" style="color: var(--ion-light-text);"></ion-icon>
-          </ion-item>
-          <ion-item>
-            <ion-label>Bis</ion-label>
-            <ion-icon name="chevron-up" style="color: var(--ion-light-text);"></ion-icon>
-            <ion-icon name="chevron-down" style="color: var(--ion-light-text);"></ion-icon>
-          </ion-item>
-          <ion-item>
-            <ion-label>Seit</ion-label>
-            <ion-icon name="chevron-up" style="color: var(--ion-light-text);"></ion-icon>
-            <ion-icon name="chevron-down" style="color: var(--ion-light-text);"></ion-icon>
-          </ion-item>
-          <ion-item>
-            <ion-label>Titel</ion-label>
-            <ion-icon name="chevron-up" style="color: var(--ion-light-text);"></ion-icon>
-            <ion-icon name="chevron-down" style="color: var(--ion-light-text);"></ion-icon>
-          </ion-item>
-          <ion-item>
-            <ion-label>Status</ion-label>
-            <ion-icon name="chevron-up" style="color: var(--ion-light-text);"></ion-icon>
-            <ion-icon name="chevron-down" style="color: var(--ion-light-text);"></ion-icon>
+          <ion-item *ngFor="let s of subjectKeys" (click)="toggleSelection(s)">
+            {{s}}
+            <ion-label>{{subjects[s].name}} ({{subjects[s].teacher}})</ion-label>
+            <ion-checkbox slot="end" [checked]="filters.subject.value === s"></ion-checkbox>
           </ion-item>
         </ion-list>
       </ng-template>

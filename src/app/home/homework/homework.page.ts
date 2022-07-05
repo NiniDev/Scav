@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {DataService} from "../../services/data.service";
-import {ModalController} from "@ionic/angular";
+import {ModalController, PopoverController} from "@ionic/angular";
 
 @Component({
   selector: 'app-homework',
@@ -19,7 +19,7 @@ export class HomeworkPage implements OnInit {
       display: 'Fach',
       value: 'ZtgwUo4C6tTIeX2FsTRq',
       property: 'subject',
-      valueDisplay: 'De'
+      valueDisplay: 'De',
     },
     status: {
       display: 'Status',
@@ -33,6 +33,7 @@ export class HomeworkPage implements OnInit {
   constructor(
     private dataService: DataService,
     private modalController: ModalController,
+    private popoverController: PopoverController
   ) {
     this.dataService.isReady.subscribe((r) => {
       if (!r) {
@@ -96,5 +97,17 @@ export class HomeworkPage implements OnInit {
 
   private appliedFilters() {
     return Object.keys(this.filters).filter(key => this.filters[key].value !== null);
+  }
+
+  private toggleSelection(s) {
+    if (this.filters.subject.value === s) {
+      this.filters.subject.value = null;
+      this.popoverController.dismiss();
+      return;
+    }
+    this.filters.subject.value = s;
+    this.filters.subject.valueDisplay = this.subjects[s].name;
+    this.filteredHomeworkKeys = this.applyFilters(this.homework, this.filters);
+
   }
 }
