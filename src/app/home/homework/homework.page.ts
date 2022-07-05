@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {DataService} from "../../services/data.service";
 import {ModalController, PopoverController} from "@ionic/angular";
 
@@ -7,7 +7,7 @@ import {ModalController, PopoverController} from "@ionic/angular";
   templateUrl: './homework.page.html',
   styleUrls: ['./homework.page.scss'],
 })
-export class HomeworkPage implements OnInit {
+export class HomeworkPage implements AfterViewInit {
   subjects = {};
   subjectKeys = Object.keys(this.subjects);
   homework = {};
@@ -74,11 +74,21 @@ export class HomeworkPage implements OnInit {
     });
   }
 
-  ngOnInit() {
+  ngAfterViewInit(): void {
+    document.getElementById('trigger-done').addEventListener('click', () => {
+      this.toggleStatusFilter(!this.filters.status.value);
+    });
+  }
+
+  toggleStatusFilter(value) {
+    this.filters.status.value = value;
+    this.filters.status.valueDisplay = this.filters.status.value ? 'Erledigt' : 'Nicht Erledigt';
+    this.filteredHomeworkKeys = this.applyFilters(this.homework, this.filters);
   }
 
   private applyFilters(homework: object, filters: object) {
     const appliedFilters = this.appliedFilters();
+    console.log(appliedFilters);
     if (appliedFilters.length === 0) {
       return homework;
     }
@@ -109,5 +119,10 @@ export class HomeworkPage implements OnInit {
     this.filters.subject.valueDisplay = this.subjects[s].name;
     this.filteredHomeworkKeys = this.applyFilters(this.homework, this.filters);
 
+  }
+
+  disableFilter(filter) {
+    this.filters[filter].value = null;
+    this.filteredHomeworkKeys = this.applyFilters(this.homework, this.filters);
   }
 }

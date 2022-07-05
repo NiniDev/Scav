@@ -12,15 +12,16 @@
     </ion-col>
   </ion-row>
   <div>
-    <ion-chip style="--color: var(--ion-light-text);--background: var(--ion-color-light)">
+    <ion-chip style="--color: var(--ion-light-text);--background: var(--ion-color-light)" id="trigger-select-filters">
       <ion-label>Filter</ion-label>
     </ion-chip>
     <ion-chip style="--color: var(--ion-light-text);--background: var(--ion-color-light)"
-              *ngFor="let filter of appliedFilters() | keys" [id]="'trigger-'+filters[filter].property">
-      <ion-label>{{filters[filter].display}}: {{filters[filter].valueDisplay}}</ion-label>
-      <ion-icon name="close" style="color: var(--ion-light-text);"></ion-icon>
+              *ngFor="let filter of appliedFilters() | keys">
+      <ion-label [id]="'trigger-'+filters[filter].property">{{filters[filter].display}}
+        : {{filters[filter].valueDisplay}}</ion-label>
+      <ion-icon name="close" style="color: var(--ion-light-text);" (click)="disableFilter(filter)"></ion-icon>
     </ion-chip>
-    <ion-popover trigger="trigger-subject" triggerAction="click">
+    <ion-popover trigger="trigger-subject" triggerAction="click" [dismissOnSelect]="true">
       <ng-template>
         <ion-list>
           <ion-item *ngFor="let s of subjectKeys" (click)="toggleSelection(s)">
@@ -28,6 +29,46 @@
             <ion-label>{{subjects[s].name}} ({{subjects[s].teacher}})</ion-label>
             <ion-checkbox slot="end" [checked]="filters.subject.value === s"></ion-checkbox>
           </ion-item>
+        </ion-list>
+      </ng-template>
+    </ion-popover>
+    <ion-popover trigger="trigger-select-filters" triggerAction="click">
+      <ng-template>
+        <ion-list>
+          <ion-item [button]="true" id="trigger-subject-select">
+            Fach
+            <ion-icon name="arrow-forward" slot="end"></ion-icon>
+          </ion-item>
+          <ion-item [button]="true" id="trigger-status-select">
+            Status
+            <ion-icon name="arrow-forward" slot="end"></ion-icon>
+          </ion-item>
+
+          <ion-popover trigger="trigger-subject-select" [dismissOnSelect]="true" side="end">
+            <ng-template>
+              <ion-list>
+                <ion-item *ngFor="let s of subjectKeys" (click)="toggleSelection(s)">
+                  {{s}}
+                  <ion-label>{{subjects[s].name}} ({{subjects[s].teacher}})</ion-label>
+                  <ion-checkbox slot="end" [checked]="filters.subject.value === s"></ion-checkbox>
+                </ion-item>
+              </ion-list>
+            </ng-template>
+          </ion-popover>
+          <ion-popover trigger="trigger-status-select" [dismissOnSelect]="true" side="end">
+            <ng-template>
+              <ion-list>
+                <ion-item (click)="toggleStatusFilter(true)">
+                  Erledigt
+                  <ion-checkbox slot="end" [checked]="filters.status.value"></ion-checkbox>
+                </ion-item>
+                <ion-item (click)="toggleStatusFilter(false)">
+                  Nicht Erledigt
+                  <ion-checkbox slot="end" [checked]="!filters.status.value"></ion-checkbox>
+                </ion-item>
+              </ion-list>
+            </ng-template>
+          </ion-popover>
         </ion-list>
       </ng-template>
     </ion-popover>
