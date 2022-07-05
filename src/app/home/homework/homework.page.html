@@ -13,14 +13,64 @@
   </ion-row>
   <div>
     <ion-chip style="--color: var(--ion-light-text);--background: var(--ion-color-light)">
-      <ion-label>Fach: Spanisch</ion-label>
+      <ion-label>Filter</ion-label>
+    </ion-chip>
+    <ion-chip style="--color: var(--ion-light-text);--background: var(--ion-color-light)" *ngFor="let filter of appliedFilters() | keys">
+      <ion-label>{{filters[filter].display}}: {{filters[filter].valueDisplay}}</ion-label>
       <ion-icon name="close" style="color: var(--ion-light-text);"></ion-icon>
     </ion-chip>
-    <ion-chip style="--color: var(--ion-light-text);--background: var(--ion-color-light)">
-      <ion-label>Status: Erledigt</ion-label>
-      <ion-icon name="close" style="color: var(--ion-light-text);"></ion-icon>
+    <ion-chip style="--color: var(--ion-light-text);--background: var(--ion-color-light)" id="click-trigger">
+      <ion-label>Sortieren: Fach</ion-label>
+      <ion-icon name="chevron-up" style="color: var(--ion-light-text);"></ion-icon>
     </ion-chip>
+    <ion-popover trigger="click-trigger" triggerAction="click">
+      <ng-template>
+        <ion-list>
+          <ion-item>
+            <ion-label>Fach</ion-label>
+            <ion-icon name="chevron-up" style="color: var(--ion-light-text);"></ion-icon>
+            <ion-icon name="chevron-down" style="color: var(--ion-light-text);"></ion-icon>
+          </ion-item>
+          <ion-item>
+            <ion-label>Bis</ion-label>
+            <ion-icon name="chevron-up" style="color: var(--ion-light-text);"></ion-icon>
+            <ion-icon name="chevron-down" style="color: var(--ion-light-text);"></ion-icon>
+          </ion-item>
+          <ion-item>
+            <ion-label>Seit</ion-label>
+            <ion-icon name="chevron-up" style="color: var(--ion-light-text);"></ion-icon>
+            <ion-icon name="chevron-down" style="color: var(--ion-light-text);"></ion-icon>
+          </ion-item>
+          <ion-item>
+            <ion-label>Titel</ion-label>
+            <ion-icon name="chevron-up" style="color: var(--ion-light-text);"></ion-icon>
+            <ion-icon name="chevron-down" style="color: var(--ion-light-text);"></ion-icon>
+          </ion-item>
+          <ion-item>
+            <ion-label>Status</ion-label>
+            <ion-icon name="chevron-up" style="color: var(--ion-light-text);"></ion-icon>
+            <ion-icon name="chevron-down" style="color: var(--ion-light-text);"></ion-icon>
+          </ion-item>
+        </ion-list>
+      </ng-template>
+    </ion-popover>
   </div>
+
+  <app-info-card *ngFor="let hw of filteredHomeworkKeys" padding="1rem">
+    <ion-label>
+      {{homework[hw].title}}
+      <ion-badge style="background: {{subjects[homework[hw].subject]?.color}}" mode="ios">
+        {{subjects[homework[hw].subject]?.abbr}}
+      </ion-badge>
+      <ion-badge mode="ios" color="light">
+        {{getDiffDays(homework[hw].until) > 0 ? getDiffDays(homework[hw].until) : 'Überfällig'}} {{getDiffDays(homework[hw].until) > 0 ? (getDiffDays(homework[hw].until) === 1 ? 'Tag' : 'Tage') : ''}}
+      </ion-badge>
+      <ion-badge color="primary" mode="ios">HA</ion-badge>
+    </ion-label>
+    <p style="margin: 0">
+      {{homework[hw].description}}
+    </p>
+  </app-info-card>
 
 
 </ion-content>
