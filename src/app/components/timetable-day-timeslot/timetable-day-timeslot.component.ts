@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {PopoverController} from '@ionic/angular';
 
 @Component({
-  selector: 'app-timetable-day-timeslot',
+  selector: '[app-timetable-day-timeslot]',
   templateUrl: './timetable-day-timeslot.component.html',
   styleUrls: ['./timetable-day-timeslot.component.scss'],
 })
