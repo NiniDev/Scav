@@ -75,7 +75,7 @@ export class HomeworkPage implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    document.getElementById('trigger-done').addEventListener('click', () => {
+    document.getElementById('trigger-done')?.addEventListener('click', () => {
       this.toggleStatusFilter(!this.filters.status.value);
     });
   }
