@@ -75,6 +75,11 @@ export class DataService {
     return collectionData(que, {idField: 'id'});
   }
 
+  getHomeworkByID(id: any) {
+    const homeworkRef = doc(this.firestore, `homework/${id}`);
+    return docData(homeworkRef);
+  }
+
   addHomework(homework) {
     homework.user = this.user.uid;
     const homeworkRef = collection(this.firestore, `homework`);
@@ -84,5 +89,15 @@ export class DataService {
   changeHomeworkStatus(id, checked) {
     const homeworkRef = doc(this.firestore, `homework/${id}`);
     return updateDoc(homeworkRef, {done: checked});
+  }
+
+  deleteHomework(id: any) {
+    const homeworkRef = doc(this.firestore, `homework/${id}`);
+    return deleteDoc(homeworkRef);
+  }
+
+  updateSingleHomework(homework: any) {
+    const homeworkRef = doc(this.firestore, `homework/${homework.id}`);
+    return updateDoc(homeworkRef, homework);
   }
 }
