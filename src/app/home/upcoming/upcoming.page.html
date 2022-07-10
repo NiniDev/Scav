@@ -3,17 +3,11 @@
   <app-layer-card-body fade_header="fade" fade_header_height="3.5rem">
     <ion-list style="background: transparent" mode="ios">
       <ion-item-sliding *ngFor="let hw of getOrderedHomework()" style="--background: transparent">
-        <ion-item-options side="start">
-          <ion-item-option style="background: transparent;" mode="ios">
-            <app-info-card icon="checkbox-outline" style="margin-left: .7rem"></app-info-card>
-          </ion-item-option>
-        </ion-item-options>
-        
           <ion-item style="--background: tranparent;" lines="none" mode="ios">
             <app-info-card padding="1rem" [extraClasses]="extraClasses(getDiffDays(hw.until))" style="width: 100%;">
               <ion-row>
                 <ion-col style="--ion-grid-column-padding: 0; align-self: center; margin-right: 1rem" size="auto">
-                  <ion-checkbox color="light" style="--background: transparent" [checked]="hw.done" (ionChange)="changeStatus(hw.id, $event)"></ion-checkbox>
+                  <ion-checkbox color="light" style="--background: transparent" [checked]="hw.done" (ionChange)="changeStatus(hw.id, $event)" mode="md"></ion-checkbox>
                 </ion-col>
                 <ion-col style="--ion-grid-column-padding: 0">
                   <ion-label>
