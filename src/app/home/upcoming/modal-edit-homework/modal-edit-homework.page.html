@@ -1,0 +1,40 @@
+<ion-content style="--ion-background-color: var(--ion-color-tertiary-shade);">
+  <h1 style="text-align: center">Hausaufgabe bearbeiten</h1>
+  <ion-list>
+    <ion-item style="color: var(--ion-light-text)">
+      <ion-label>Fach:</ion-label>
+      <ion-select placeholder="Fach auswählen" interface="popover" [(ngModel)]="subject" (ionChange)="subjectChanged()">
+        <ion-select-option *ngFor="let s of subjectKeys" [value]="s">
+          {{subjects[s].name}} ({{subjects[s].teacher}})
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item style="color: var(--ion-light-text)">
+      <ion-label>Titel:</ion-label>
+      <ion-input type="text" [(ngModel)]="title"></ion-input>
+    </ion-item>
+    <ion-item style="color: var(--ion-light-text)">
+      <ion-label>Beschreibung:</ion-label>
+      <ion-textarea type="text" [(ngModel)]="description" auto-grow rows="1"></ion-textarea>
+    </ion-item>
+    <ion-datetime [(ngModel)]="until"
+                  mode="ios"
+                  style="margin-top: .5rem; --background: var(--ion-color-tertiary-shade);"
+                  firstDayOfWeek="1"
+                  presentation="date"
+                  size="cover"
+                  min="2022-07-03"
+                  [isDateEnabled]="isDateEnabled"
+                  locale="de-DE"
+    >
+    <!-- TODO: Show old date as selected -->
+      <span slot="title" style="color: var(--ion-light-text)">Bis:</span>
+    </ion-datetime>
+
+  </ion-list>
+  <ion-button expand="block" (click)="updateHomework()" color="success"
+              [disabled]="!(until && description && title && subject)">Speichern
+  </ion-button>
+  <ion-button expand="block" (click)="cancel()" color="danger">Abbrechen</ion-button>
+
+</ion-content>
