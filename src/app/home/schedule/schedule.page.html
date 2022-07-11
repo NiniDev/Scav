@@ -80,15 +80,15 @@
                         class="{{day}}-order" [id]="e">
                 <ion-icon name="trash" style=" vertical-align: middle; font-size: 1.4rem" (click)="deleteEvent(day, e)">
                 </ion-icon>
-                <app-timetable-day-timeslot
+                <tr app-timetable-day-timeslot
                   style="width: 100%"
                   [event]="events[day][e]"
                   [subjects]="subjects"
                   [homework]="{}"
                   *ngIf="!events[day][e].break"
                   opacity="ff"
-                  editable="true"
-                ></app-timetable-day-timeslot>
+                  [editable]=true
+                ></tr>
                 <div *ngIf="events[day][e].break"
                      style="background: var(--ion-color-medium); width: 100%; color: var(--ion-light-text); vertical-align: middle">
                   Pause
