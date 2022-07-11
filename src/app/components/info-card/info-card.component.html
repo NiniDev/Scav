@@ -2,7 +2,7 @@
      [style]="padding.length === 0 ? '' : 'padding: ' + padding">
   <ng-container *ngTemplateOutlet="contentTpl"></ng-container>
 </div>
-<div class="info-card" *ngIf="icon.length !== 0" [style]="
+<div class="info-card" *ngIf="icon.length !== 0 && !iconOnly" [style]="
   padding.length === 0 ? '' : 'padding: {{padding}}'">
   <ion-grid>
     <ion-row>
@@ -15,6 +15,16 @@
         <ng-container *ngTemplateOutlet="contentTpl"></ng-container>
       </ion-col>
     </ion-row>
+  </ion-grid>
+</div>
+<div class="info-card" *ngIf="icon.length !== 0 && iconOnly" [style]="
+  padding.length === 0 ? '' : 'padding: {{padding}}'" style="background: transparent; padding-inline: 0;">
+  <ion-grid style="padding-inline: 0;">
+      <ion-col size="auto" style="display: flex; padding-inline: 0;">
+        <div class="info-card icon" style="background: {{icon_bg}}; margin: auto; display: flex">
+          <ion-icon name="{{icon}}" style="font-size: 2rem; color: #fff; padding: .5rem;"></ion-icon>
+        </div>
+      </ion-col>
   </ion-grid>
 </div>
 <ng-template #contentTpl>
