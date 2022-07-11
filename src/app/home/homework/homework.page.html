@@ -120,10 +120,10 @@
       <ion-item-options side="end">
         <ion-item-option style="background: transparent;" mode="ios">
           <app-info-card icon="trash-outline" style="margin-right: .7rem" icon_bg="var(--ion-color-danger)"
-                         (click)="deleteHomework(homework[hw].id)">
+                         (click)="deleteHomework(homework[hw].id)" [iconOnly]=true>
           </app-info-card>
           <app-info-card icon="create-outline" style="margin-right: .7rem" icon_bg="var(--ion-color-tertiary)"
-                         (click)="editHomework(homework[hw].id)">
+                         (click)="editHomework(homework[hw].id)" [iconOnly]=true>
           </app-info-card>
         </ion-item-option>
       </ion-item-options>
