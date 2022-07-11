@@ -34,10 +34,10 @@
         <ion-item-options side="end">
           <ion-item-option style="background: transparent;" mode="ios">
             <app-info-card icon="trash-outline" style="margin-right: .7rem" icon_bg="var(--ion-color-danger)"
-                           (click)="deleteHomework(hw.id)">
+                           (click)="deleteHomework(hw.id)" [iconOnly]=true>
             </app-info-card>
             <app-info-card icon="create-outline" style="margin-right: .7rem" icon_bg="var(--ion-color-tertiary)"
-                           (click)="editHomework(hw.id)">
+                           (click)="editHomework(hw.id)" [iconOnly]=true>
             </app-info-card>
           </ion-item-option>
         </ion-item-options>
