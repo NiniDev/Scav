@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {DataService} from '../../services/data.service';
 import {ModalController} from '@ionic/angular';
 import {ModalAddHomeworkPage} from './modal-add-homework/modal-add-homework.page';
+import { ModalEditHomeworkPage } from './modal-edit-homework/modal-edit-homework.page';
 
 @Component({
   selector: 'app-upcoming',
@@ -138,6 +139,38 @@ export class UpcomingPage implements OnInit {
     console.log(id, $event.detail.checked);
     this.dataService.changeHomeworkStatus(id, $event.detail.checked).then(() => {
       console.log('changed');
+    });
+  }
+
+  deleteHomework(id) {
+    this.dataService.deleteHomework(id).then(() => {
+      console.log('deleted');
+    });
+  }
+
+  editHomework(id) {
+    this.modalController.create({
+      component: ModalEditHomeworkPage,
+      componentProps: {
+        subjects: this.subjects,
+        subjectKeys: this.subjectKeys,
+        events: this.events,
+        id: id,
+      },
+      breakpoints: [0, 0.6, 1, 0.3, 0.8],
+      initialBreakpoint: 0.8,
+      cssClass: 'modal-round',
+    }).then(modal => {
+      modal.present();
+      modal.onDidDismiss().then(result => {
+        if (result.data && result.role === 'update') {
+          result.data.id = id;
+          
+          this.dataService.updateSingleHomework(result.data).then(() => {
+            console.log('edited');
+          });
+        }
+      });
     });
   }
 }

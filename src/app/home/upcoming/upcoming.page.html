@@ -1,28 +1,48 @@
 <app-layer-card top="0" color_style="dark">
-  <app-layer-card-header header_height="3.5rem" fade="fade" color_style="dark">Anstehende Aufgaben</app-layer-card-header>
+  <app-layer-card-header header_height="3.5rem" fade="fade" color_style="dark">Anstehende Aufgaben
+  </app-layer-card-header>
   <app-layer-card-body fade_header="fade" fade_header_height="3.5rem">
-    <app-info-card *ngFor="let hw of getOrderedHomework()" padding="1rem" [extraClasses]="extraClasses(getDiffDays(hw.until))">
-      <ion-row>
-        <ion-col style="--ion-grid-column-padding: 0; align-self: center; margin-right: 1rem" size="auto">
-          <ion-checkbox color="light" style="--background: transparent" [checked]="hw.done" (ionChange)="changeStatus(hw.id, $event)"></ion-checkbox>
-        </ion-col>
-        <ion-col style="--ion-grid-column-padding: 0">
-          <ion-label>
-            {{hw.title}}
-            <ion-badge style="background: {{subjects[hw.subject].color}}" mode="ios">
-              {{subjects[hw.subject].abbr}}
-            </ion-badge>
-            <ion-badge mode="ios" color="light">
-              {{getDiffDays(hw.until) > 0 ? getDiffDays(hw.until) : 'Überfällig'}} {{getDiffDays(hw.until) > 0 ? (getDiffDays(hw.until) === 1 ? 'Tag' : 'Tage') : ''}}
-            </ion-badge>
-            <ion-badge color="primary" mode="ios">HA</ion-badge>
-          </ion-label>
-          <p style="margin: 0">
-            {{hw.description}}
-          </p>
-        </ion-col>
-      </ion-row>
-    </app-info-card>
+    <ion-list style="background: transparent" mode="ios" lines="none">
+      <ion-item-sliding *ngFor="let hw of getOrderedHomework()" style="--background: transparent">
+        <ion-item style="--background: tranparent;" lines="none" mode="ios">
+          <app-info-card padding="1rem" [extraClasses]="extraClasses(getDiffDays(hw.until))" style="width: 100%;">
+            <ion-row>
+              <ion-col style="--ion-grid-column-padding: 0; align-self: center; margin-right: 1rem" size="auto">
+                <ion-checkbox color="light" style="--background: transparent" [checked]="hw.done"
+                              (ionChange)="changeStatus(hw.id, $event)" mode="md"></ion-checkbox>
+              </ion-col>
+              <ion-col style="--ion-grid-column-padding: 0">
+                <ion-label>
+                  {{hw.title}}
+                  <ion-badge style="background: {{subjects[hw.subject].color}}" mode="ios">
+                    {{subjects[hw.subject].abbr}}
+                  </ion-badge>
+                  <ion-badge mode="ios" color="light">
+                    {{getDiffDays(hw.until) > 0 ? getDiffDays(hw.until) : 'Überfällig'}} {{getDiffDays(hw.until) > 0 ?
+                    (getDiffDays(hw.until) === 1 ? 'Tag' : 'Tage') : ''}}
+                  </ion-badge>
+                  <ion-badge color="primary" mode="ios">HA</ion-badge>
+                </ion-label>
+                <p style="margin: 0">
+                  {{hw.description}}
+                </p>
+              </ion-col>
+            </ion-row>
+          </app-info-card>
+        </ion-item>
+
+        <ion-item-options side="end">
+          <ion-item-option style="background: transparent;" mode="ios">
+            <app-info-card icon="trash-outline" style="margin-right: .7rem" icon_bg="var(--ion-color-danger)"
+                           (click)="deleteHomework(hw.id)">
+            </app-info-card>
+            <app-info-card icon="create-outline" style="margin-right: .7rem" icon_bg="var(--ion-color-tertiary)"
+                           (click)="editHomework(hw.id)">
+            </app-info-card>
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
   </app-layer-card-body>
 </app-layer-card>
 <ion-fab style="right: 1rem; bottom: 3.5rem; position: fixed">

@@ -11,6 +11,10 @@ const routes: Routes = [
   {
     path: 'modal-add-homework',
     loadChildren: () => import('./modal-add-homework/modal-add-homework.module').then( m => m.ModalAddHomeworkPageModule)
+  },
+  {
+    path: 'modal-edit-homework',
+    loadChildren: () => import('./modal-edit-homework/modal-edit-homework.module').then( m => m.ModalEditHomeworkPageModule)
   }
 ];
 
