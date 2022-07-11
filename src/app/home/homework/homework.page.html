@@ -48,7 +48,6 @@
             <ng-template>
               <ion-list>
                 <ion-item *ngFor="let s of subjectKeys" (click)="toggleSelection(s)">
-                  {{s}}
                   <ion-label>{{subjects[s].name}} ({{subjects[s].teacher}})</ion-label>
                   <ion-checkbox slot="end" [checked]="filters.subject.value === s"></ion-checkbox>
                 </ion-item>
@@ -60,11 +59,11 @@
               <ion-list>
                 <ion-item (click)="toggleStatusFilter(true)">
                   Erledigt
-                  <ion-checkbox slot="end" [checked]="filters.status.value"></ion-checkbox>
+                  <ion-checkbox slot="end" [checked]="filters.status.value === true"></ion-checkbox>
                 </ion-item>
                 <ion-item (click)="toggleStatusFilter(false)">
                   Nicht Erledigt
-                  <ion-checkbox slot="end" [checked]="!filters.status.value"></ion-checkbox>
+                  <ion-checkbox slot="end" [checked]="filters.status.value === false"></ion-checkbox>
                 </ion-item>
               </ion-list>
             </ng-template>
@@ -74,7 +73,7 @@
     </ion-popover>
   </div>
 
-  <app-info-card *ngFor="let hw of filteredHomeworkKeys" padding="1rem">
+  <!-- <app-info-card *ngFor="let hw of filteredHomeworkKeys" padding="1rem">
     <ion-label>
       {{homework[hw].title}}
       <ion-badge style="background: {{subjects[homework[hw].subject]?.color}}" mode="ios">
@@ -88,7 +87,48 @@
     <p style="margin: 0">
       {{homework[hw].description}}
     </p>
-  </app-info-card>
+  </app-info-card> -->
+  <ion-list style="background: transparent" mode="ios" lines="none">
+    <ion-item-sliding *ngFor="let hw of filteredHomeworkKeys" style="--background: transparent">
+      <ion-item style="--background: tranparent;" lines="none" mode="ios">
+        <app-info-card padding="1rem" style="width: 100%;">
+          <ion-row>
+            <ion-col style="--ion-grid-column-padding: 0; align-self: center; margin-right: 1rem" size="auto">
+              <ion-checkbox color="light" style="--background: transparent" [checked]="homework[hw].done"
+                            (ionChange)="changeStatus(homework[hw].id, $event)" mode="md"></ion-checkbox>
+            </ion-col>
+            <ion-col style="--ion-grid-column-padding: 0">
+              <ion-label>
+                {{homework[hw].title}}
+                <ion-badge style="background: {{subjects[homework[hw].subject].color}}" mode="ios">
+                  {{subjects[homework[hw].subject].abbr}}
+                </ion-badge>
+                <ion-badge mode="ios" color="light">
+                  {{getDiffDays(homework[hw].until) > 0 ? getDiffDays(homework[hw].until) : 'Überfällig'}} {{getDiffDays(homework[hw].until) > 0 ?
+                  (getDiffDays(homework[hw].until) === 1 ? 'Tag' : 'Tage') : ''}}
+                </ion-badge>
+                <ion-badge color="primary" mode="ios">HA</ion-badge>
+              </ion-label>
+              <p style="margin: 0">
+                {{homework[hw].description}}
+              </p>
+            </ion-col>
+          </ion-row>
+        </app-info-card>
+      </ion-item>
+
+      <ion-item-options side="end">
+        <ion-item-option style="background: transparent;" mode="ios">
+          <app-info-card icon="trash-outline" style="margin-right: .7rem" icon_bg="var(--ion-color-danger)"
+                         (click)="deleteHomework(homework[hw].id)">
+          </app-info-card>
+          <app-info-card icon="create-outline" style="margin-right: .7rem" icon_bg="var(--ion-color-tertiary)"
+                         (click)="editHomework(homework[hw].id)">
+          </app-info-card>
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
 
 
 </ion-content>

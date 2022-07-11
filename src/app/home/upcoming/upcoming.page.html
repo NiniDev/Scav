@@ -2,7 +2,7 @@
   <app-layer-card-header header_height="3.5rem" fade="fade" color_style="dark">Anstehende Aufgaben
   </app-layer-card-header>
   <app-layer-card-body fade_header="fade" fade_header_height="3.5rem">
-    <ion-list style="background: transparent" mode="ios">
+    <ion-list style="background: transparent" mode="ios" lines="none">
       <ion-item-sliding *ngFor="let hw of getOrderedHomework()" style="--background: transparent">
         <ion-item style="--background: tranparent;" lines="none" mode="ios">
           <app-info-card padding="1rem" [extraClasses]="extraClasses(getDiffDays(hw.until))" style="width: 100%;">

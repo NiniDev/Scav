@@ -1,6 +1,7 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {DataService} from "../../services/data.service";
 import {ModalController, PopoverController} from "@ionic/angular";
+import { ModalEditHomeworkPage } from '../upcoming/modal-edit-homework/modal-edit-homework.page';
 
 @Component({
   selector: 'app-homework',
@@ -17,13 +18,13 @@ export class HomeworkPage implements AfterViewInit {
   filters = {
     subject: {
       display: 'Fach',
-      value: 'ZtgwUo4C6tTIeX2FsTRq',
+      value: null,
       property: 'subject',
       valueDisplay: 'De',
     },
     status: {
       display: 'Status',
-      value: true,
+      value: null,
       property: 'done',
       valueDisplay: 'Erledigt'
     }
@@ -90,7 +91,7 @@ export class HomeworkPage implements AfterViewInit {
     const appliedFilters = this.appliedFilters();
     console.log(appliedFilters);
     if (appliedFilters.length === 0) {
-      return homework;
+      return Object.keys(homework);
     }
     let filteredHomeworkKeys = Object.keys(homework);
     for (const filter of appliedFilters) {
@@ -124,5 +125,45 @@ export class HomeworkPage implements AfterViewInit {
   disableFilter(filter) {
     this.filters[filter].value = null;
     this.filteredHomeworkKeys = this.applyFilters(this.homework, this.filters);
+    console.log(this.filters);
+  }
+
+  editHomework(id) {
+    this.modalController.create({
+      component: ModalEditHomeworkPage,
+      componentProps: {
+        subjects: this.subjects,
+        subjectKeys: this.subjectKeys,
+        events: this.events,
+        id: id,
+      },
+      breakpoints: [0, 0.6, 1, 0.3, 0.8],
+      initialBreakpoint: 0.8,
+      cssClass: 'modal-round',
+    }).then(modal => {
+      modal.present();
+      modal.onDidDismiss().then(result => {
+        if (result.data && result.role === 'update') {
+          result.data.id = id;
+          
+          this.dataService.updateSingleHomework(result.data).then(() => {
+            console.log('edited');
+          });
+        }
+      });
+    });
+  }
+
+  changeStatus(id, $event: any) {
+    console.log(id, $event.detail.checked);
+    this.dataService.changeHomeworkStatus(id, $event.detail.checked).then(() => {
+      console.log('changed');
+    });
+  }
+  
+  deleteHomework(id) {
+    this.dataService.deleteHomework(id).then(() => {
+      console.log('deleted');
+    });
   }
 }
