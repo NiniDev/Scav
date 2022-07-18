@@ -82,7 +82,11 @@ export class HomeworkPage implements AfterViewInit {
   }
 
   toggleStatusFilter(value) {
-    this.filters.status.value = value;
+    if (this.filters.status.value === value) {
+      this.filters.status.value = null;
+    } else {
+      this.filters.status.value = value;
+    }
     this.filters.status.valueDisplay = this.filters.status.value ? 'Erledigt' : 'Nicht Erledigt';
     this.filteredHomeworkKeys = this.applyFilters(this.homework, this.filters);
   }
@@ -113,13 +117,12 @@ export class HomeworkPage implements AfterViewInit {
   private toggleSelection(s) {
     if (this.filters.subject.value === s) {
       this.filters.subject.value = null;
-      this.popoverController.dismiss();
-      return;
+    } else {
+      this.filters.subject.value = s;
     }
-    this.filters.subject.value = s;
     this.filters.subject.valueDisplay = this.subjects[s].name;
     this.filteredHomeworkKeys = this.applyFilters(this.homework, this.filters);
-
+    this.popoverController.dismiss();
   }
 
   disableFilter(filter) {
