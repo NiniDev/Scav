@@ -100,4 +100,16 @@ export class DataService {
     const homeworkRef = doc(this.firestore, `homework/${homework.id}`);
     return updateDoc(homeworkRef, homework);
   }
+
+  getFlashcardSets() {
+    const flashcardSetsRef = collection(this.firestore, `flashcardSets`);
+    const que = query(flashcardSetsRef, where('user', '==', this.user.uid));
+    return collectionData(que, {idField: 'id'});
+  }
+
+  addFlashcardSet(flashcardSet) {
+    flashcardSet.user = this.user.uid;
+    const flashcardSetsRef = collection(this.firestore, `flashcardSets`);
+    return addDoc(flashcardSetsRef, flashcardSet);
+  }
 }
