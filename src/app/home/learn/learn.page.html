@@ -1,9 +1,18 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>learn</ion-title>
+    <ion-title class="ion-text-center">Karteikarten</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-list>
+<!--    fcs = flashcardSet-->
+    <ion-item *ngFor="let fcs of flashcardSetKeys" (click)="openFlashcardSet(fcs)" style="--border-color: var(--ion-color-light)">
+      <ion-label style="color: white">
+        <h2>{{flashcardSets[fcs].name}}</h2>
+        <p style="color: lightslategray;">{{flashcardSets[fcs].description}}</p></ion-label>
+      <ion-label slot="end" style="color: white">{{flashcardSets[fcs].flashcards.length}} Karteikarten</ion-label>
+    </ion-item>
+  </ion-list>
 
 </ion-content>
